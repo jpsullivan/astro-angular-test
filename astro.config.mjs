@@ -30,8 +30,10 @@ export default defineConfig({
     }),
     angular({
       vite: {
-        // Completely disable transformation - use client-only rendering
-        transformFilter: () => false,
+        // Only transform Angular component files for better Starlight compatibility
+        transformFilter: (_code, id) => {
+          return id.includes('src/components') || id.includes('src\\components');
+        },
         advanced: {
           tsconfig: './tsconfig.app.json',
         },
