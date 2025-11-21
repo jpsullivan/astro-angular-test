@@ -1,0 +1,98 @@
+---
+title: Theming
+description: Design tokens and color system for light and dark modes.
+---
+
+import { ThemingComponent } from '../../../components/theming.component';
+
+This design system uses **OKLCH color space** for precise, perceptually uniform colors that work beautifully in both light and dark modes. All colors are defined as CSS custom properties (variables) that automatically adapt based on the user's color scheme preference.
+
+## About OKLCH
+
+OKLCH is a modern color space that provides:
+- **Perceptual uniformity**: Colors with the same lightness value appear equally bright
+- **Wide gamut support**: Access to more vivid colors than sRGB
+- **Predictable manipulation**: Adjusting lightness, chroma, or hue produces intuitive results
+
+The format is: `oklch(lightness chroma hue / alpha)`
+- **Lightness** (0-1): 0 is black, 1 is white
+- **Chroma** (0-0.4): Color intensity/saturation
+- **Hue** (0-360): Color angle (0=red, 120=green, 240=blue)
+- **Alpha** (optional): Transparency (0-1 or percentage)
+
+## Design Tokens
+
+<ThemingComponent client:only="angular" />
+
+## Using the Theme
+
+All design tokens are available as CSS custom properties. Use them in your styles:
+
+```css
+.my-component {
+  background-color: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+
+.my-button {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.my-button:hover {
+  background-color: var(--accent);
+  color: var(--accent-foreground);
+}
+```
+
+## Color System Guidelines
+
+### Semantic Color Usage
+
+- **Background/Foreground**: Base colors for page structure
+- **Card**: Elevated surfaces that sit above the background
+- **Popover**: Temporary floating elements
+- **Primary**: Main brand actions and emphasis
+- **Secondary**: Alternative actions of lesser importance
+- **Muted**: Reduced emphasis, disabled states
+- **Accent**: Hover states and temporary highlights
+- **Destructive**: Errors, deletions, warnings
+- **Borders & Inputs**: Structural elements
+- **Ring**: Accessibility focus indicators
+
+### Sidebar Colors
+
+The sidebar system has its own color palette to maintain visual hierarchy:
+- Use `--sidebar-*` tokens exclusively within navigation sidebars
+- These tokens ensure proper contrast and visual separation from main content
+- The sidebar can have different theming than the main content area
+
+### Chart Colors
+
+Five distinct colors are provided for data visualization:
+- Use in order (chart-1, chart-2, etc.) for data series
+- These colors are optimized for distinguishability
+- Maintain consistency across related visualizations
+
+## Accessibility
+
+All color combinations meet **WCAG 2.1 Level AA** contrast requirements:
+- Foreground/background pairs: minimum 4.5:1 ratio
+- Large text: minimum 3:1 ratio
+- Focus indicators use the `--ring` color for keyboard navigation
+
+## Dark Mode
+
+Dark mode is automatically applied based on the user's system preference (`prefers-color-scheme: dark`). You don't need to write separate styles for dark mode—the CSS custom properties automatically switch to their dark mode values.
+
+If you need to create custom dark mode styles:
+
+```css
+@media (prefers-color-scheme: dark) {
+  .my-custom-element {
+    /* Dark mode specific styles */
+  }
+}
+```
