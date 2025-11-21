@@ -1,0 +1,57 @@
+---
+title: Review a Preview Server Instance
+description: How to review and test preview deployments
+---
+
+# Review a Preview Server Instance
+
+Learn how to effectively review and test preview server instances before promoting to production.
+
+## Accessing Previews
+
+Each preview deployment gets a unique URL:
+```
+https://preview-[branch-name]-[project].example.com
+```
+
+## Review Checklist
+
+- [ ] Functionality works as expected
+- [ ] UI/UX matches designs
+- [ ] Performance is acceptable
+- [ ] No console errors
+- [ ] Mobile responsive
+- [ ] Cross-browser compatible
+
+## Testing Tools
+
+### Built-in Tools
+- Performance metrics
+- Lighthouse scores
+- Error tracking
+- Console logs
+
+### Integration Testing
+Run automated tests against the preview instance.
+
+```bash
+npm run test:e2e -- --url=https://preview-url.com
+```
+
+## Approval Workflow
+
+1. Developer creates PR
+2. Preview deploys automatically
+3. Team reviews preview
+4. Feedback provided via comments
+5. Changes made and preview updates
+6. Final approval given
+7. Merge to production
+
+## Tips for Effective Reviews
+
+- Test on real devices when possible
+- Check all user flows
+- Verify data integrity
+- Test edge cases
+- Review security implications

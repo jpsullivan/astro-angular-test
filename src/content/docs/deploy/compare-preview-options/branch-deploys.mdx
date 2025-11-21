@@ -1,0 +1,33 @@
+---
+title: Branch Deploys
+description: Deploy from Git branches
+---
+
+# Branch Deploys
+
+Automatically deploy every branch for testing and collaboration.
+
+## How It Works
+
+1. Push to any branch
+2. Automatic deployment triggered
+3. Unique URL generated
+4. Share with your team
+
+## Benefits
+
+- Test features in isolation
+- Easy collaboration
+- No conflicts with production
+- Automatic cleanup of old branches
+
+## Configuration
+
+Enable branch deploys in your project settings:
+
+```yaml
+branch_deploy:
+  enabled: true
+  pattern: "feature/*"
+  retention_days: 30
+```

@@ -1,0 +1,66 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Header.astro';
+
+// Get the current path to highlight active nav item
+const currentPath = Astro.url.pathname;
+---
+
+<Default {...Astro.props}>
+  <div slot="before-social" class="custom-nav-links">
+    <a
+      href="/start/"
+      class:list={['nav-link', { active: currentPath.startsWith('/start') }]}
+    >
+      Start
+    </a>
+    <a
+      href="/deploy/"
+      class:list={['nav-link', { active: currentPath.startsWith('/deploy') }]}
+    >
+      Deploy
+    </a>
+    <a
+      href="/components/"
+      class:list={['nav-link', { active: currentPath.startsWith('/components') }]}
+    >
+      Components
+    </a>
+  </div>
+</Default>
+
+<style>
+  .custom-nav-links {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-inline-end: 1rem;
+  }
+
+  .nav-link {
+    color: var(--sl-color-gray-2);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9375rem;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .nav-link:hover {
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-gray-5);
+  }
+
+  .nav-link.active {
+    color: var(--sl-color-white);
+    background-color: var(--sl-color-accent);
+  }
+
+  @media (max-width: 50rem) {
+    .custom-nav-links {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,43 @@
+---
+title: Protect Deploys
+description: Secure your deployments
+---
+
+# Protect Deploys
+
+Learn how to secure and protect your deployments from unauthorized access and changes.
+
+## Protection Methods
+
+### Password Protection
+Add password authentication to preview deployments.
+
+### IP Allowlisting
+Restrict access to specific IP addresses.
+
+### Branch Protection
+Prevent deployments from protected branches without approval.
+
+### Deploy Keys
+Use SSH keys for secure deployments.
+
+## Configuration
+
+```yaml
+protection:
+  password: true
+  ip_allowlist:
+    - "192.168.1.0/24"
+    - "10.0.0.0/8"
+  require_approval: true
+  approvers:
+    - "admin@example.com"
+```
+
+## Best Practices
+
+- Always password-protect preview deploys
+- Use environment-specific credentials
+- Rotate deploy keys regularly
+- Audit deployment logs
+- Enable two-factor authentication
