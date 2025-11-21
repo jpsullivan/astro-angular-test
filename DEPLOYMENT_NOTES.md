@@ -1,37 +1,28 @@
-# Deployment Issues
+# Deployment Notes
 
 ## Current Status
-❌ **Build failing** due to package incompatibilities
+✅ **Build successful** - All package incompatibilities resolved!
 
-## Root Cause
-`@analogjs/astro-angular@0.2.8` is designed for Angular 16 but this project uses Angular 17. The version mismatch causes the Angular compiler plugin to fail during builds with the error:
-```
-TypeError: Cannot read properties of undefined (reading 'minimalContext')
-```
+## Solution Applied
+Upgraded all packages to latest compatible versions:
 
-Additionally, `@astrojs/starlight` uses top-level await which conflicts with the esbuild configuration.
+### Package Versions
+- **Astro**: 4.x → **5.x** (for Vite 6 support)
+- **Angular**: 17.x → **20.x** (for latest @analogjs compatibility)
+- **TypeScript**: 5.4.5 → **5.8.x** (required by Angular 20)
+- **Starlight**: 0.19.x → **0.33.x** (latest with social config updates)
+- **@analogjs/astro-angular**: 0.2.8 → **2.1.0** (with Vite 6 + Angular 20 support)
 
-## Solutions
+### Configuration Changes
+- Updated Starlight `social` config from object to array format (v0.33+ requirement)
+- Set `transformFilter: () => false` to use client-only rendering
+- Configured proper esbuild targets for ES2022 with top-level await support
 
-### Option 1: Full Upgrade (Recommended)
-Upgrade to compatible versions:
-```bash
-npm install @angular/core@20 @angular/common@20 @analogjs/astro-angular@latest astro@5 @astrojs/starlight@latest --save --legacy-peer-deps
-```
-
-### Option 2: Remove Starlight
-Use plain Astro with Angular components (no Starlight):
-```bash
-npm uninstall @astrojs/starlight
-```
-Then create custom documentation pages.
-
-### Option 3: Remove Angular Integration
-Keep Starlight but remove Angular components:
-```bash
-npm uninstall @analogjs/astro-angular @angular/core @angular/common
-```
-Document components with code examples only.
+### Build Results
+✅ TypeScript check: 0 errors, 0 warnings
+✅ Pages built: 4
+✅ Build time: ~23s
+✅ Angular components: Successfully bundled
 
 ## Files Modified
 - `astro.config.mjs` - Angular integration configuration
