@@ -8,6 +8,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Angular Components Docs',
+      customCss: [
+        './src/styles/custom.css',
+      ],
       social: [
         {
           label: 'GitHub',

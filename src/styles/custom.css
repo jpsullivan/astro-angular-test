@@ -1,0 +1,32 @@
+/* Custom navigation link styles */
+
+/* Base styles for all sidebar links */
+.sidebar-content a {
+    display: block;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    font-weight: var(--font-weight-bold, 600);
+    text-decoration: none;
+    color: var(--heading-text-color, var(--sl-color-white));
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Active/current page link - with teal border */
+.sidebar-content a[aria-current="page"] {
+    border-color: var(--teal-200, var(--sl-color-accent));
+}
+
+/* Hover state for non-active links */
+.sidebar-content a:hover:not([aria-current="page"]) {
+    color: var(--sl-color-accent);
+}
+
+/* Ensure proper spacing for nested items */
+.sidebar-content li {
+    margin: 0;
+}
+
+/* Additional styling for dropdown toggles if they have active children */
+.sidebar-content details[open] > summary a {
+    color: var(--sl-color-accent);
+}
