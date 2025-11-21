@@ -8,9 +8,13 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Angular Components Docs',
-      social: {
-        github: 'https://github.com/withastro/starlight',
-      },
+      social: [
+        {
+          label: 'GitHub',
+          icon: 'github',
+          href: 'https://github.com/withastro/starlight',
+        },
+      ],
       sidebar: [
         {
           label: 'Getting Started',
