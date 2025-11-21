@@ -4,6 +4,7 @@ import angular from '@analogjs/astro-angular';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'static',
   integrations: [
     starlight({
       title: 'Angular Components Docs',
@@ -23,6 +24,44 @@ export default defineConfig({
         },
       ],
     }),
-    angular(),
+    angular({
+      vite: {
+        // Only transform Angular component files, not Starlight files
+        transformFilter: (_code, id) => {
+          // Exclude node_modules and only include our component files
+          if (id.includes('node_modules')) return false;
+          if (id.includes('@astrojs/starlight')) return false;
+          return id.includes('/src/components/') && id.endsWith('.component.ts');
+        },
+        advanced: {
+          tsconfig: './tsconfig.app.json',
+        },
+      },
+    }),
   ],
+  vite: {
+    build: {
+      target: 'es2022',
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'es2022',
+        supported: {
+          'top-level-await': true,
+        },
+      },
+      exclude: ['@astrojs/starlight'],
+    },
+    ssr: {
+      // Transform Angular packages during SSR
+      noExternal: ['@angular/**', '@analogjs/**'],
+      target: 'node',
+    },
+    esbuild: {
+      target: 'es2022',
+      supported: {
+        'top-level-await': true,
+      },
+    },
+  },
 });
