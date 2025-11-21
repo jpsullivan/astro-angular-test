@@ -13,8 +13,19 @@ This documentation site showcases a collection of standalone Angular components 
 
 ## Integration with Astro
 
-We use `@analogjs/astro-angular` to seamlessly integrate Angular components into this Astro Starlight documentation site. This allows us to provide live, interactive examples of each component.
+This documentation site uses Astro Starlight to provide a fast, accessible documentation experience. The Angular components are available as standalone files that you can copy into your Angular projects.
+
+:::tip[Development Mode]
+When running the development server locally (`npm run dev`), you can see live, interactive demos of the components using the `@analogjs/astro-angular` integration.
+:::
 
 ## Getting Started
 
-Browse the Components section in the sidebar to explore available components, see live examples, and learn how to use them in your projects.
+Browse the Components section in the sidebar to explore available components, view code examples, and learn how to use them in your projects. Each component page includes:
+
+- Complete source code
+- Usage examples
+- API documentation
+- Accessibility guidelines
+
+Simply copy the component code into your Angular application and customize as needed!

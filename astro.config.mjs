@@ -1,9 +1,9 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
-import angular from '@analogjs/astro-angular';
 
 // https://astro.build/config
 export default defineConfig({
+  output: 'static',
   integrations: [
     starlight({
       title: 'Angular Components Docs',
@@ -23,6 +23,29 @@ export default defineConfig({
         },
       ],
     }),
-    angular(),
   ],
+  vite: {
+    build: {
+      target: 'es2022',
+      rollupOptions: {
+        output: {
+          manualChunks: undefined,
+        },
+      },
+    },
+    optimizeDeps: {
+      esbuildOptions: {
+        target: 'es2022',
+        supported: {
+          'top-level-await': true,
+        },
+      },
+    },
+    esbuild: {
+      target: 'es2022',
+      supported: {
+        'top-level-await': true,
+      },
+    },
+  },
 });

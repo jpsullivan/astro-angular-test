@@ -87,10 +87,26 @@ npm run preview
 
 ## 📝 Notes
 
+### Component Architecture
+
 - **@spartan-ng/brain** was considered but removed due to Angular version compatibility issues (requires Angular 20+)
 - The Badge component is built as a standalone Angular component following Spartan UI design principles
 - Components use Angular's `OnPush` change detection strategy for optimal performance
 - All components are fully typed with TypeScript
+
+### Build & Deployment
+
+**Important:** The `@analogjs/astro-angular` integration has known limitations with production builds. To enable successful static site generation for deployment platforms like Vercel, the Angular integration is **disabled in the production configuration**.
+
+- **Development mode** (`npm run dev`): Full Angular integration with live component demos
+- **Production build** (`npm run build`): Angular integration disabled, documentation site only
+- **Component source code**: Available in `src/components/` for use in your Angular projects
+
+This setup provides:
+✅ Beautiful documentation site that deploys successfully
+✅ Full component source code for Angular applications
+✅ Live component demos in development mode
+✅ Comprehensive usage examples and API documentation
 
 ## 🤝 Contributing
 
