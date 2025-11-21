@@ -51,30 +51,32 @@ const currentPath = Astro.url.pathname;
   .custom-nav-links {
     display: flex;
     gap: 1rem;
-    align-items: center;
+    align-items: stretch;
     margin-inline-end: auto;
     margin-inline-start: 1rem;
+    height: 100%;
   }
 
   .nav-link {
-    color: var(--sl-color-gray-2);
+    height: 100%;
+    padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
+    font-weight: var(--font-weight-bold);
     text-decoration: none;
-    font-weight: 500;
-    font-size: var(--sl-text-sm);
-    padding: 0.5rem 0.75rem;
-    border-radius: 0.5rem;
-    transition: all 0.2s ease;
+    color: var(--heading-text-color);
+    transition: color 0.2s;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    font-size: var(--sl-text-sm);
   }
 
   .nav-link:hover {
     color: var(--sl-color-white);
-    background-color: var(--sl-color-gray-5);
   }
 
   .nav-link.active {
-    color: var(--sl-color-white);
-    background-color: var(--sl-color-accent);
+    border-color: var(--teal-200);
   }
 
   .right-group {
