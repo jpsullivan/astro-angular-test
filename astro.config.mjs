@@ -10,6 +10,7 @@ export default defineConfig({
       title: 'Angular Components Docs',
       components: {
         Header: './src/components/overrides/Header.astro',
+        Sidebar: './src/components/overrides/Sidebar.astro',
       },
       social: [
         {

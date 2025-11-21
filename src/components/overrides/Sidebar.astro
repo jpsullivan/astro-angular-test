@@ -1,0 +1,35 @@
+---
+import type { Props } from '@astrojs/starlight/props';
+import Default from '@astrojs/starlight/components/Sidebar.astro';
+
+// Get the current path to determine active nav item
+const currentPath = Astro.url.pathname;
+
+// Define which sidebar section should be shown based on the active nav
+let activeSections: string[] = ['Getting Started']; // Always show Getting Started
+
+if (currentPath.startsWith('/start')) {
+  activeSections.push('Start');
+} else if (currentPath.startsWith('/deploy')) {
+  activeSections.push('Deploy');
+} else if (currentPath.startsWith('/components')) {
+  activeSections.push('Components');
+} else {
+  // For other paths (like /guides/ or /learn/), show Learn section
+  activeSections.push('Learn');
+}
+
+// Filter the sidebar to only show relevant sections
+// Check if sidebar exists before filtering
+const filteredSidebar = Astro.props.sidebar?.filter((section) => {
+  return activeSections.includes(section.label);
+}) || [];
+
+// Create new props with filtered sidebar
+const newProps = {
+  ...Astro.props,
+  sidebar: filteredSidebar,
+};
+---
+
+<Default {...newProps} />
