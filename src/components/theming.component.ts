@@ -18,7 +18,7 @@ interface ColorToken {
   imports: [],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
-    <div class="theming-page">
+    <div class="theming-page not-content">
       <div class="intro">
         <p>This page shows all available design tokens in both light and dark modes.
         Each token is displayed with its OKLCH value and a visual color swatch.</p>
