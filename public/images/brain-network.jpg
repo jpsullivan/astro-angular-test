@@ -1,0 +1,61 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#0f172a"/>
+
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="#e2e8f0">
+    Neural Network Visualization
+  </text>
+
+  <!-- Define gradient for connections -->
+  <defs>
+    <radialGradient id="nodeGrad">
+      <stop offset="0%" style="stop-color:rgb(59,130,246);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(37,99,235);stop-opacity:0.8" />
+    </radialGradient>
+  </defs>
+
+  <!-- Central nodes -->
+  <circle cx="400" cy="300" r="20" fill="url(#nodeGrad)" opacity="0.9"/>
+  <circle cx="300" cy="250" r="15" fill="url(#nodeGrad)" opacity="0.8"/>
+  <circle cx="500" cy="250" r="15" fill="url(#nodeGrad)" opacity="0.8"/>
+  <circle cx="350" cy="350" r="15" fill="url(#nodeGrad)" opacity="0.8"/>
+  <circle cx="450" cy="350" r="15" fill="url(#nodeGrad)" opacity="0.8"/>
+
+  <!-- Outer ring -->
+  <circle cx="200" cy="200" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="600" cy="200" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="200" cy="400" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="600" cy="400" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="250" cy="150" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="550" cy="150" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="250" cy="450" r="12" fill="#8b5cf6" opacity="0.7"/>
+  <circle cx="550" cy="450" r="12" fill="#8b5cf6" opacity="0.7"/>
+
+  <!-- Connections - central to mid ring -->
+  <line x1="400" y1="300" x2="300" y2="250" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <line x1="400" y1="300" x2="500" y2="250" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <line x1="400" y1="300" x2="350" y2="350" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+  <line x1="400" y1="300" x2="450" y2="350" stroke="#3b82f6" stroke-width="2" opacity="0.4"/>
+
+  <!-- Connections - mid to outer -->
+  <line x1="300" y1="250" x2="200" y2="200" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="300" y1="250" x2="250" y2="150" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="500" y1="250" x2="600" y2="200" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="500" y1="250" x2="550" y2="150" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="350" y1="350" x2="200" y2="400" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="350" y1="350" x2="250" y2="450" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="450" y1="350" x2="600" y2="400" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+  <line x1="450" y1="350" x2="550" y2="450" stroke="#8b5cf6" stroke-width="1.5" opacity="0.3"/>
+
+  <!-- Cross connections -->
+  <line x1="300" y1="250" x2="500" y2="250" stroke="#3b82f6" stroke-width="1.5" opacity="0.2"/>
+  <line x1="350" y1="350" x2="450" y2="350" stroke="#3b82f6" stroke-width="1.5" opacity="0.2"/>
+  <line x1="200" y1="200" x2="200" y2="400" stroke="#8b5cf6" stroke-width="1" opacity="0.2"/>
+  <line x1="600" y1="200" x2="600" y2="400" stroke="#8b5cf6" stroke-width="1" opacity="0.2"/>
+
+  <!-- Labels -->
+  <text x="400" y="550" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" fill="#94a3b8">
+    Interconnected neural pathways shaping behavior
+  </text>
+</svg>
