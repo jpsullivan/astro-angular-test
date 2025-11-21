@@ -26,13 +26,8 @@ export default defineConfig({
     }),
     angular({
       vite: {
-        // Only transform Angular component files, not Starlight files
-        transformFilter: (_code, id) => {
-          // Exclude node_modules and only include our component files
-          if (id.includes('node_modules')) return false;
-          if (id.includes('@astrojs/starlight')) return false;
-          return id.includes('/src/components/') && id.endsWith('.component.ts');
-        },
+        // Completely disable transformation - use client-only rendering
+        transformFilter: () => false,
         advanced: {
           tsconfig: './tsconfig.app.json',
         },
