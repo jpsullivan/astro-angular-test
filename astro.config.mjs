@@ -24,6 +24,10 @@ export default defineConfig({
           ],
         },
         {
+          label: 'Learn',
+          autogenerate: { directory: 'learn' },
+        },
+        {
           label: 'Components',
           autogenerate: { directory: 'components' },
         },
