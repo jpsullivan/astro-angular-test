@@ -1,13 +1,18 @@
 ---
 import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/Header.astro';
+import Search from '@astrojs/starlight/components/Search.astro';
+import SocialIcons from '@astrojs/starlight/components/SocialIcons.astro';
+import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
+import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
+import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 
 // Get the current path to highlight active nav item
 const currentPath = Astro.url.pathname;
 ---
 
-<Default {...Astro.props}>
-  <div slot="before-social" class="custom-nav-links">
+<div class="header sl-flex">
+  <SiteTitle {...Astro.props} />
+  <nav class="custom-nav-links" aria-label="Main">
     <a
       href="/start/"
       class:list={['nav-link', { active: currentPath.startsWith('/start') }]}
@@ -26,22 +31,36 @@ const currentPath = Astro.url.pathname;
     >
       Components
     </a>
+  </nav>
+  <div class="sl-hidden md:sl-flex right-group">
+    <Search {...Astro.props} />
+    <SocialIcons {...Astro.props} />
+    <ThemeSelect {...Astro.props} />
+    <LanguageSelect {...Astro.props} />
   </div>
-</Default>
+</div>
 
 <style>
+  .header {
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+  }
+
   .custom-nav-links {
     display: flex;
-    gap: 1.5rem;
+    gap: 1rem;
     align-items: center;
-    margin-inline-end: 1rem;
+    margin-inline-end: auto;
+    margin-inline-start: 1rem;
   }
 
   .nav-link {
     color: var(--sl-color-gray-2);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.9375rem;
+    font-size: var(--sl-text-sm);
     padding: 0.5rem 0.75rem;
     border-radius: 0.5rem;
     transition: all 0.2s ease;
@@ -56,6 +75,11 @@ const currentPath = Astro.url.pathname;
   .nav-link.active {
     color: var(--sl-color-white);
     background-color: var(--sl-color-accent);
+  }
+
+  .right-group {
+    gap: 1rem;
+    align-items: center;
   }
 
   @media (max-width: 50rem) {
