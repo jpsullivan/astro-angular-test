@@ -1,0 +1,111 @@
+---
+title: Badge
+description: A component for displaying badges with different variants.
+---
+
+import { BadgeDemoComponent } from '../../../components/badge-demo.component';
+
+The Badge component is a versatile UI element for displaying status, labels, or categories. It comes with multiple style variants to suit different use cases.
+
+## Live Demo
+
+<BadgeDemoComponent client:only="angular" />
+
+## Installation
+
+To use the Badge component in your Angular application, copy the component file into your project:
+
+```typescript
+// badge.component.ts
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { NgClass } from '@angular/common';
+
+export type BadgeVariant = 'default' | 'secondary' | 'destructive' | 'outline';
+
+@Component({
+  selector: 'app-badge',
+  standalone: true,
+  imports: [NgClass],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  template: `
+    <span [ngClass]="variantClasses">
+      <ng-content></ng-content>
+    </span>
+  `,
+  styles: [/* styles here */]
+})
+export class BadgeComponent {
+  @Input() variant: BadgeVariant = 'default';
+
+  get variantClasses(): string {
+    return \`badge-\${this.variant}\`;
+  }
+}
+```
+
+## Usage
+
+Import the `BadgeComponent` and use it in your template:
+
+```typescript
+import { Component } from '@angular/core';
+import { BadgeComponent } from './badge.component';
+
+@Component({
+  selector: 'app-my-component',
+  standalone: true,
+  imports: [BadgeComponent],
+  template: `
+    <app-badge>Default Badge</app-badge>
+    <app-badge variant="secondary">Secondary Badge</app-badge>
+    <app-badge variant="destructive">Error</app-badge>
+    <app-badge variant="outline">Outline Badge</app-badge>
+  `
+})
+export class MyComponent {}
+```
+
+## Variants
+
+The Badge component supports four variants:
+
+- **default**: Dark background with light text (light background in dark mode)
+- **secondary**: Light gray background with dark text
+- **destructive**: Red background for errors or warnings
+- **outline**: Transparent background with a border
+
+## API
+
+### Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `variant` | `'default' \| 'secondary' \| 'destructive' \| 'outline'` | `'default'` | The visual style variant of the badge |
+
+### Content
+
+The Badge component accepts content through Angular's content projection (`<ng-content>`), allowing you to place any text or elements inside the badge.
+
+## Accessibility
+
+- The badge uses semantic HTML with a `<span>` element
+- Color is not the only means of conveying information (text labels are included)
+- Sufficient color contrast ratios are maintained for readability
+
+## Examples
+
+### Status Indicators
+
+```typescript
+<app-badge>Active</app-badge>
+<app-badge variant="secondary">Pending</app-badge>
+<app-badge variant="destructive">Failed</app-badge>
+```
+
+### Category Tags
+
+```typescript
+<app-badge variant="outline">TypeScript</app-badge>
+<app-badge variant="outline">Angular</app-badge>
+<app-badge variant="outline">Astro</app-badge>
+```
