@@ -1,0 +1,35 @@
+---
+title: Welcome to Angular Components Documentation
+description: A documentation site for standalone Angular components built with Spartan Brain.
+template: splash
+hero:
+  tagline: Beautiful, accessible Angular components powered by @spartan-ng/brain
+  actions:
+    - text: Get Started
+      link: /guides/introduction/
+      icon: right-arrow
+      variant: primary
+    - text: View Components
+      link: /components/badge/
+      icon: open-book
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## Features
+
+<CardGrid>
+  <Card title="Standalone Components" icon="puzzle">
+    Built using Angular's latest standalone components API.
+  </Card>
+  <Card title="Spartan Brain" icon="rocket">
+    Powered by the @spartan-ng/brain package for robust component primitives.
+  </Card>
+  <Card title="Live Examples" icon="star">
+    Interactive component demos directly in the documentation.
+  </Card>
+  <Card title="TypeScript First" icon="seti:typescript">
+    Fully typed for the best developer experience.
+  </Card>
+</CardGrid>
