@@ -1,0 +1,47 @@
+---
+title: Deploy Notifications
+description: Set up deployment notifications
+---
+
+# Deploy Notifications
+
+Stay informed about your deployments with automated notifications.
+
+## Notification Channels
+
+### Email
+Receive email notifications for deployment events.
+
+### Slack
+Get real-time updates in your Slack workspace.
+
+### Webhook
+Send deployment events to custom endpoints.
+
+### GitHub
+Comment on pull requests with deployment status.
+
+## Event Types
+
+- Deployment started
+- Deployment succeeded
+- Deployment failed
+- Preview ready
+- Production updated
+
+## Configuration
+
+```yaml
+notifications:
+  email:
+    - "team@example.com"
+  slack:
+    webhook: "https://hooks.slack.com/..."
+    channel: "#deployments"
+  github:
+    enabled: true
+```
+
+## Custom Notifications
+
+Create custom notification templates and rules based on your workflow.

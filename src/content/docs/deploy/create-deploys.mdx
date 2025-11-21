@@ -1,0 +1,46 @@
+---
+title: Create Deploys
+description: How to create new deployments
+---
+
+# Create Deploys
+
+Learn how to create and trigger new deployments.
+
+## Deployment Methods
+
+### Automatic Deploys
+Triggered automatically when you push to your repository.
+
+### Manual Deploys
+Deploy on-demand from the dashboard or CLI.
+
+### Scheduled Deploys
+Set up deployments on a schedule.
+
+## CLI Commands
+
+```bash
+# Deploy current branch
+npm run deploy
+
+# Deploy specific branch
+npm run deploy --branch=feature-x
+
+# Deploy with custom config
+npm run deploy --config=production
+```
+
+## Configuration
+
+Set up your deployment pipeline in `.deploy.yml`:
+
+```yaml
+version: 1
+build:
+  command: npm run build
+  output: dist/
+deploy:
+  region: us-east-1
+  cdn: true
+```
