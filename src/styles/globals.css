@@ -128,6 +128,21 @@
 	--stl-ui-button-font-weight: 500;
 	--stl-ui-button-font-size: var(--stl-ui-type-scale-text-sm);
 	--stl-ui-button-font-family: var(--stl-ui-typography-font);
+
+	--sl-color-bg-table-row: #ffffff0a;
+    --sl-button-border-radius: 8px;
+    --sl-text-body-sm: .86rem;
+    --sl-content-width: 52rem;
+    --sl-nav-pad-y: .5rem;
+    --sl-nav-height: 56px;
+    --sl-sidebar-width: 19rem;
+    --sl-button-size: 32px;
+    --sl-button-padding-x: .75rem;
+    --sl-button-padding-y: .5rem;
+    --sl-button-icon-offset: .2rem;
+    --sl-menu-button-size: var(--sl-button-size);
+    --sl-nav-gap: .5rem;
+    --sl-icon-color: var(--sl-color-text);
 }
 
 :root[data-theme=light] {
