@@ -79,6 +79,7 @@ export default defineConfig({
           items: [
             { label: 'Overview', link: '/components/' },
             { label: 'Badge', link: '/components/badge/' },
+            { label: 'Input', link: '/components/input/' },
           ],
         },
         {
