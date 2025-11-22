@@ -1,4 +1,8 @@
-@import "tailwindcss";
+@layer base, starlight, theme, components, utilities;
+
+@import "@astrojs/starlight-tailwind";
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
 @import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
@@ -109,14 +113,6 @@
 	--sidebar-border: oklch(0.92 0.01 0);
 	--sidebar-ring: oklch(0.74 0.093 273);
 
-	/* Status Indicator Colors - Light Mode */
-	--status-on-track-bg: oklch(0.63 0.17 146.8 / 0.25);
-	--status-on-track-fg: oklch(0.63 0.17 146.8);
-	--status-at-risk-bg: oklch(0.74 0.17 91.4 / 0.25);
-	--status-at-risk-fg: oklch(0.74 0.17 91.4);
-	--status-off-track-bg: oklch(0.57 0.2 22.7 / 0.25);
-	--status-off-track-fg: oklch(0.57 0.2 22.7);
-
 	/* Page Layout */
 	--sl-page-max-width: 90rem;
 
@@ -130,19 +126,19 @@
 	--stl-ui-button-font-family: var(--stl-ui-typography-font);
 
 	--sl-color-bg-table-row: #ffffff0a;
-    --sl-button-border-radius: 8px;
-    --sl-text-body-sm: .86rem;
-    --sl-content-width: 52rem;
-    --sl-nav-pad-y: .5rem;
-    --sl-nav-height: 56px;
-    --sl-sidebar-width: 19rem;
-    --sl-button-size: 32px;
-    --sl-button-padding-x: .75rem;
-    --sl-button-padding-y: .5rem;
-    --sl-button-icon-offset: .2rem;
-    --sl-menu-button-size: var(--sl-button-size);
-    --sl-nav-gap: .5rem;
-    --sl-icon-color: var(--sl-color-text);
+	--sl-button-border-radius: 8px;
+	--sl-text-body-sm: 0.86rem;
+	--sl-content-width: 52rem;
+	--sl-nav-pad-y: 0.5rem;
+	--sl-nav-height: 56px;
+	--sl-sidebar-width: 19rem;
+	--sl-button-size: 32px;
+	--sl-button-padding-x: 0.75rem;
+	--sl-button-padding-y: 0.5rem;
+	--sl-button-icon-offset: 0.2rem;
+	--sl-menu-button-size: var(--sl-button-size);
+	--sl-nav-gap: 0.5rem;
+	--sl-icon-color: var(--sl-color-text);
 
 	/* Button Component Variables */
 	--stl-ui-inverse-foreground: oklch(1 0 0);
@@ -162,10 +158,11 @@
 	--stl-ui-type-scale-text-sm: 0.875rem;
 	--stl-ui-typography-text-body-xs: 0.75rem;
 	--stl-ui-typography-text-body: 1rem;
-	--stl-ui-typography-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+	--stl-ui-typography-font:
+		system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-:root[data-theme=light] {
+:root[data-theme="light"] {
 	--stl-ui-foreground-accent: #0a0a0a;
 	--stl-ui-accent-background: #0a0a0a;
 	--stl-ui-accent-foreground: #ffffff;
@@ -214,14 +211,6 @@
 	--sidebar-border: oklch(0.33 0.02 275);
 	--sidebar-ring: oklch(0.74 0.18 270);
 
-	/* Status Indicator Colors - Dark Mode */
-	--status-on-track-bg: oklch(0.73 0.18 146 / 0.25);
-	--status-on-track-fg: oklch(0.73 0.18 146);
-	--status-at-risk-bg: oklch(0.88 0.18 95.1 / 0.25);
-	--status-at-risk-fg: oklch(0.88 0.18 95.1);
-	--status-off-track-bg: oklch(0.7 0.18 23 / 0.25);
-	--status-off-track-fg: oklch(0.7 0.18 23);
-
 	/* Button Component Variables - Dark Mode */
 	--stl-ui-inverse-foreground: oklch(0.2 0 0);
 	--stl-ui-inverse-background: oklch(0.97 0.012 275);
@@ -244,8 +233,16 @@
 	}
 }
 
+.page {
+	position: relative;
+	max-width: var(--sl-page-max-width);
+	margin: 0 auto;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
 /* Sidebar Styles */
-.sidebar-content:where(.astro-jyino6jq) {
+.sidebar-content {
 	height: 100%;
 	min-height: max-content;
 	padding: 1rem var(--sl-sidebar-pad-x) 0;
@@ -255,140 +252,290 @@
 
 /* Button Component Styles */
 .stl-ui-button {
-    --stl-ui-button-color: var(--stl-ui-inverse-foreground);
-    --stl-ui-button-background-color: var(--stl-ui-inverse-background);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-inverse-background) 90%, var(--stl-ui-background) );
-    --stl-ui-button-border-color: transparent;
-    --stl-ui-button-border-color-hover: transparent;
-    --stl-ui-button-height: 32px;
-    --stl-ui-button-padding: 8px 10px;
-    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-sml);
-    --stl-ui-button-line-height: 150%;
-    --stl-ui-button-font-weight: 500;
-    --stl-ui-button-font-size: var(--stl-ui-type-scale-text-sm);
-    --stl-ui-button-font-family: var(--stl-ui-typography-font);
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-    white-space: nowrap;
-    flex-shrink: 0;
-    height: var(--stl-ui-button-height);
-    padding: var(--stl-ui-button-padding);
-    border-radius: var(--stl-ui-button-border-radius);
-    line-height: var(--stl-ui-button-line-height);
-    font-weight: var(--stl-ui-button-font-weight);
-    font-size: var(--stl-ui-button-font-size);
-    border: 1px solid var(--stl-ui-button-border-color);
-    font-family: var(--stl-ui-button-font-family);
-    color: var(--stl-ui-button-color);
-    background-color: var(--stl-ui-button-background-color);
-    &:hover {
-        background-color: var(--stl-ui-button-background-color-hover);
-        border-color: var(--stl-ui-button-border-color-hover)
-    }
+	--stl-ui-button-color: var(--stl-ui-inverse-foreground);
+	--stl-ui-button-background-color: var(--stl-ui-inverse-background);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-inverse-background) 90%,
+		var(--stl-ui-background)
+	);
+	--stl-ui-button-border-color: transparent;
+	--stl-ui-button-border-color-hover: transparent;
+	--stl-ui-button-height: 32px;
+	--stl-ui-button-padding: 8px 10px;
+	--stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-sml);
+	--stl-ui-button-line-height: 150%;
+	--stl-ui-button-font-weight: 500;
+	--stl-ui-button-font-size: var(--stl-ui-type-scale-text-sm);
+	--stl-ui-button-font-family: var(--stl-ui-typography-font);
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 2px;
+	white-space: nowrap;
+	flex-shrink: 0;
+	height: var(--stl-ui-button-height);
+	padding: var(--stl-ui-button-padding);
+	border-radius: var(--stl-ui-button-border-radius);
+	line-height: var(--stl-ui-button-line-height);
+	font-weight: var(--stl-ui-button-font-weight);
+	font-size: var(--stl-ui-button-font-size);
+	border: 1px solid var(--stl-ui-button-border-color);
+	font-family: var(--stl-ui-button-font-family);
+	color: var(--stl-ui-button-color);
+	background-color: var(--stl-ui-button-background-color);
+	&:hover {
+		background-color: var(--stl-ui-button-background-color-hover);
+		border-color: var(--stl-ui-button-border-color-hover);
+	}
 
-    &[hidden] {
-        display: none
-    }
+	&[hidden] {
+		display: none;
+	}
 }
 
 .stl-ui-button--accent {
-    --stl-ui-button-color: var(--stl-ui-accent-foreground);
-    --stl-ui-button-background-color: var(--stl-ui-accent-background);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-accent-background) 90%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-accent-foreground);
+	--stl-ui-button-background-color: var(--stl-ui-accent-background);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-accent-background) 90%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--accent-muted {
-    --stl-ui-button-color: var(--stl-ui-accent-muted-foreground);
-    --stl-ui-button-background-color: var(--stl-ui-accent-muted-background);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-accent-background) 10%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-accent-muted-foreground);
+	--stl-ui-button-background-color: var(--stl-ui-accent-muted-background);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-accent-background) 10%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--muted {
-    --stl-ui-button-color: var(--stl-ui-foreground);
-    --stl-ui-button-background-color: var(--stl-ui-muted-background);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 10%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-foreground);
+	--stl-ui-button-background-color: var(--stl-ui-muted-background);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-foreground) 10%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--outline {
-    --stl-ui-button-color: var(--stl-ui-foreground);
-    --stl-ui-button-background-color: var(--stl-ui-card-background);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 5%, var(--stl-ui-inverse-foreground) );
-    --stl-ui-button-border-color: var(--stl-ui-border);
-    --stl-ui-button-border-color-hover: var(--stl-ui-border-emphasis)
+	--stl-ui-button-color: var(--stl-ui-foreground);
+	--stl-ui-button-background-color: var(--stl-ui-card-background);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-foreground) 5%,
+		var(--stl-ui-inverse-foreground)
+	);
+	--stl-ui-button-border-color: var(--stl-ui-border);
+	--stl-ui-button-border-color-hover: var(--stl-ui-border-emphasis);
 }
 
 .stl-ui-button--ghost {
-    --stl-ui-button-color: var(--stl-ui-foreground);
-    --stl-ui-button-background-color: transparent;
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 5%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-foreground);
+	--stl-ui-button-background-color: transparent;
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-foreground) 5%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--success {
-    --stl-ui-button-color: var(--stl-ui-swatch-gray-white);
-    --stl-ui-button-background-color: var(--stl-ui-swatch-green-base);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-swatch-green-base) 90%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-swatch-gray-white);
+	--stl-ui-button-background-color: var(--stl-ui-swatch-green-base);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-swatch-green-base) 90%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--destructive {
-    --stl-ui-button-color: var(--stl-ui-swatch-gray-white);
-    --stl-ui-button-background-color: var(--stl-ui-swatch-red-base);
-    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-swatch-red-base) 90%, var(--stl-ui-inverse-foreground) )
+	--stl-ui-button-color: var(--stl-ui-swatch-gray-white);
+	--stl-ui-button-background-color: var(--stl-ui-swatch-red-base);
+	--stl-ui-button-background-color-hover: color-mix(
+		in oklch,
+		var(--stl-ui-swatch-red-base) 90%,
+		var(--stl-ui-inverse-foreground)
+	);
 }
 
 .stl-ui-button--size-sm {
-    --stl-ui-button-height: 24px;
-    --stl-ui-button-padding: 0 6px;
-    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-xs);
-    --stl-ui-button-line-height: 100%;
-    --stl-ui-button-font-weight: 500;
-    --stl-ui-button-font-size: var(--stl-ui-typography-text-body-xs)
+	--stl-ui-button-height: 24px;
+	--stl-ui-button-padding: 0 6px;
+	--stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-xs);
+	--stl-ui-button-line-height: 100%;
+	--stl-ui-button-font-weight: 500;
+	--stl-ui-button-font-size: var(--stl-ui-typography-text-body-xs);
 }
 
 .stl-ui-button--size-lg {
-    --stl-ui-button-height: 40px;
-    --stl-ui-button-padding: 8px 14px;
-    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius);
-    --stl-ui-button-line-height: 150%;
-    --stl-ui-button-font-weight: 500;
-    --stl-ui-button-font-size: var(--stl-ui-typography-text-body)
+	--stl-ui-button-height: 40px;
+	--stl-ui-button-padding: 8px 14px;
+	--stl-ui-button-border-radius: var(--stl-ui-layout-border-radius);
+	--stl-ui-button-line-height: 150%;
+	--stl-ui-button-font-weight: 500;
+	--stl-ui-button-font-size: var(--stl-ui-typography-text-body);
 }
 
 .stl-ui-button__icon {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    svg {
-        margin-top: 0
-    }
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	svg {
+		margin-top: 0;
+	}
 }
 
 .stl-ui-button:has(.stl-ui-button__icon:first-child) .stl-ui-button__icon {
-    margin-left: -4px;
-    margin-right: 4px
+	margin-left: -4px;
+	margin-right: 4px;
 }
 
 .stl-ui-button:has(.stl-ui-button__icon:last-child) .stl-ui-button__icon {
-    margin-right: -4px;
-    margin-left: 4px;
-    &:first-child {
-        margin-left: -4px;
-        margin-right: 4px
-    }
+	margin-right: -4px;
+	margin-left: 4px;
+	&:first-child {
+		margin-left: -4px;
+		margin-right: 4px;
+	}
 }
 
-.stl-ui-button:not(:has(.stl-ui-button-label)):has(.stl-ui-button__icon:last-child):has(.stl-ui-button__icon:first-child) {
-    width: var(--stl-ui-button-height);
-    .stl-ui-button__icon {
-        margin-left: -4px;
-        margin-right: -4px
-    }
+.stl-ui-button:not(:has(.stl-ui-button-label)):has(
+		.stl-ui-button__icon:last-child
+	):has(.stl-ui-button__icon:first-child) {
+	width: var(--stl-ui-button-height);
+	.stl-ui-button__icon {
+		margin-left: -4px;
+		margin-right: -4px;
+	}
 }
 
 a.stl-ui-button {
-    text-decoration: none;
-    text-align: center
+	text-decoration: none;
+	text-align: center;
+}
+
+.site-title {
+	img {
+		height: 32px;
+		width: auto;
+	}
+}
+
+.header {
+	background-color: var(--color-background);
+}
+
+@media (min-width: 50rem) {
+	.header {
+		padding-inline-start: 0;
+		padding-inline-end: 0;
+	}
+
+	header.header {
+		display: flex;
+		flex-direction: column;
+		gap: 0.29rem;
+		padding-bottom: 0;
+	}
+}
+
+.page,
+.page > header .header,
+.page > header .secondary-nav-tabs {
+	@media (min-width: 50rem) {
+		padding-inline: 20px;
+	}
+}
+
+site-search {
+	> button {
+		min-width: unset;
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0;
+		width: var(--sl-button-size);
+		justify-content: center;
+		background-color: var(--sl-color-bg-ui);
+		border: 1px solid var(--sl-color-hairline);
+		border-radius: var(--sl-button-border-radius);
+		height: var(--sl-button-size);
+	}
+}
+
+@media (min-width: 50rem) {
+	site-search {
+		> button {
+			border-radius: var(--sl-button-border-radius);
+			padding-inline-start: var(--sl-button-padding-x);
+			padding-inline-end: var(--sl-button-padding-x);
+			width: 100%;
+			max-width: 30rem;
+			justify-content: start;
+		}
+	}
+}
+
+.sidebar-pane {
+	left: unset;
+	margin-inline-start: calc(-1 * (1rem + 12px));
+	border-inline-end: 1px solid var(--color-gray-100);
+}
+
+.sidebar-content {
+	ul ul li {
+		border-inline-start: 1px solid var(--color-gray-100);
+		margin-inline-start: 12px;
+	}
+
+	& ul ul li {
+		&:has(> a[aria-current="page"]) {
+			border-inline-start: 2px solid #0a0a0a;
+
+			> a {
+				margin-left: -1px;
+			}
+		}
+	}
+
+	ul ul :is(summary, li) {
+		border-start-start-radius: 0;
+		border-end-start-radius: 0;
+	}
+
+	summary,
+	li {
+		margin: 0;
+		border-radius: 8px;
+	}
+
+	li a {
+		&[aria-current="page"] {
+			font-weight: 500;
+		}
+	}
+
+	& summary,
+	& li a {
+		&:hover,
+		&[aria-current="page"] {
+			background-color: inherit;
+			color: var(--color-foreground);
+		}
+	}
+
+	li:has(> a:is(:hover, [aria-current="page"])),
+	summary:hover {
+		background-color: var(--color-gray-100);
+	}
 }

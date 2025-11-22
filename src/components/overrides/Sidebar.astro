@@ -1,30 +1,30 @@
 ---
-import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
-import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
-import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
+import MobileMenuFooter from "@astrojs/starlight/components/MobileMenuFooter.astro";
+import SidebarPersister from "@astrojs/starlight/components/SidebarPersister.astro";
+import SidebarSublist from "@astrojs/starlight/components/SidebarSublist.astro";
 
 // Get the sidebar from Starlight's route data
 const fullSidebar = Astro.locals.starlightRoute.sidebar;
 const currentPath = Astro.url.pathname;
 
 // Define which sidebar sections should be shown based on the active nav
-let activeSections: string[] = ['Getting Started']; // Always show Getting Started
+const activeSections: string[] = ["Getting Started"]; // Always show Getting Started
 
-if (currentPath.startsWith('/start')) {
-  activeSections.push('Start');
-} else if (currentPath.startsWith('/deploy')) {
-  activeSections.push('Deploy');
-} else if (currentPath.startsWith('/components')) {
-  activeSections.push('Components');
+if (currentPath.startsWith("/start")) {
+  activeSections.push("Start");
+} else if (currentPath.startsWith("/deploy")) {
+  activeSections.push("Deploy");
+} else if (currentPath.startsWith("/components")) {
+  activeSections.push("Components");
 } else {
   // For other paths (like /guides/ or /learn/), show Learn section
-  activeSections.push('Learn');
+  activeSections.push("Learn");
 }
 
 // Filter the sidebar to only show relevant sections
 const filteredSidebar = fullSidebar.filter((entry: any) => {
   // Keep group entries that match our active sections
-  if (entry.type === 'group') {
+  if (entry.type === "group") {
     return activeSections.includes(entry.label);
   }
   // Keep non-group entries (links)
@@ -33,9 +33,9 @@ const filteredSidebar = fullSidebar.filter((entry: any) => {
 ---
 
 <SidebarPersister>
-	<SidebarSublist sublist={filteredSidebar} />
+  <SidebarSublist sublist={filteredSidebar} />
 </SidebarPersister>
 
-<div class="md:sl-hidden">
-	<MobileMenuFooter />
+<div class="md:hidden">
+  <MobileMenuFooter />
 </div>

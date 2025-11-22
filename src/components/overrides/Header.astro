@@ -1,56 +1,99 @@
 ---
-import Search from '@astrojs/starlight/components/Search.astro';
-import SiteTitle from '@astrojs/starlight/components/SiteTitle.astro';
-import ThemeSelect from '@astrojs/starlight/components/ThemeSelect.astro';
-import Button from '../Button.astro';
+import Search from "@astrojs/starlight/components/Search.astro";
+import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
+import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
+import Button from "@components/Button.astro";
 
 // Get the current path to highlight active nav item
 const currentPath = Astro.url.pathname;
 ---
 
-<header class="header">
-  <div class="header-top">
-    <div class="left-group">
-      <div class="title-wrapper sl-flex">
-        <SiteTitle {...Astro.props} />
-      </div>
-    </div>
-
-    <div class="top-container">
-      <Search {...Astro.props} />
-    </div>
-
-    <div class="sl-hidden md:sl-flex right-group">
-      <ThemeSelect {...Astro.props} />
-      <Button href="mailto:feedback@yourdomain.com" variant="outline">
-        Feedback
-      </Button>
-      <Button href="https://app.yourdomain.com" target="_blank" variant="accent">
-        Dashboard
-      </Button>
+<div class="header">
+  <div class="left-group">
+    <div class="title-wrapper flex">
+      <SiteTitle {...Astro.props} />
     </div>
   </div>
 
-  <div class="secondary-nav-tabs">
-    <nav aria-label="Main">
-      <ul>
-        <li class:list={[{ active: currentPath.startsWith('/start') }]}>
-          <a href="/start/">Start</a>
-        </li>
-        <li class:list={[{ active: currentPath.startsWith('/deploy') }]}>
-          <a href="/deploy/">Deploy</a>
-        </li>
-        <li class:list={[{ active: currentPath.startsWith('/components') }]}>
-          <a href="/components/">Components</a>
-        </li>
-      </ul>
-    </nav>
+  <div class="top-container">
+    <Search {...Astro.props} />
   </div>
-</header>
+
+  <div class="hidden md:flex print:hidden right-group">
+    <!-- <ThemeSelect {...Astro.props} /> -->
+    <Button href="mailto:feedback@yourdomain.com" variant="outline">
+      Feedback
+    </Button>
+    <Button href="https://app.yourdomain.com" target="_blank" variant="accent">
+      Dashboard
+    </Button>
+  </div>
+</div>
+
+<div class="secondary-nav-tabs">
+  <ul>
+    <li class:list={[{ active: currentPath.startsWith("/start") }]}>
+      <a
+        href="/start/"
+        class="stl-ui-button stl-ui-button--ghost not-content stl-ui-not-prose stl-active-secondary-link"
+        >Start</a
+      >
+    </li>
+    <li class:list={[{ active: currentPath.startsWith("/deploy") }]}>
+      <a
+        href="/deploy/"
+        class="stl-ui-button stl-ui-button--ghost not-content stl-ui-not-prose stl-active-secondary-link"
+        >Deploy</a
+      >
+    </li>
+    <li class:list={[{ active: currentPath.startsWith("/components") }]}>
+      <a
+        href="/components/"
+        class="stl-ui-button stl-ui-button--ghost not-content stl-ui-not-prose stl-active-secondary-link"
+        >Components</a
+      >
+    </li>
+  </ul>
+</div>
 
 <style>
+  header {
+    z-index: var(--sl-z-index-navbar);
+    position: fixed;
+    inset-inline-start: 0;
+    inset-block-start: 0;
+    width: 100%;
+    height: var(--sl-nav-height);
+    border-bottom: 1px solid var(--sl-color-hairline-shade);
+    padding: var(--sl-nav-pad-y) var(--sl-nav-pad-x);
+    padding-inline-end: var(--sl-nav-pad-x);
+    border-bottom: 1px solid var(--color-border);
+    background-color: var(--color-background);
+  }
+
   .header {
-    border-bottom: 1px solid var(--sl-color-hairline);
+    background-color: var(--color-background);
+    display: flex;
+    gap: var(--sl-nav-gap);
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    max-width: var(--sl-page-max-width);
+    margin: 0 auto;
+  }
+
+  @media (min-width: 50rem) {
+    .header {
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+    }
+  }
+
+  header {
+    &.header {
+      border-bottom-color: var(--sl-color-hairline);
+    }
   }
 
   .header-top {
@@ -80,13 +123,15 @@ const currentPath = Astro.url.pathname;
   }
 
   .right-group {
-    display: flex;
     gap: 0.75rem;
     align-items: center;
   }
 
   .secondary-nav-tabs {
-    border-top: 1px solid var(--sl-color-hairline-shade);
+    display: none;
+    width: 100%;
+    max-width: var(--sl-page-max-width);
+    margin: 0 auto;
   }
 
   .secondary-nav-tabs nav {
@@ -97,9 +142,9 @@ const currentPath = Astro.url.pathname;
     display: flex;
     align-items: center;
     padding: 0;
-    margin: 0;
     list-style: none;
-    gap: 0.25rem;
+    margin-bottom: -1px;
+    gap: 4px;
   }
 
   .secondary-nav-tabs li {
@@ -109,11 +154,21 @@ const currentPath = Astro.url.pathname;
   }
 
   .secondary-nav-tabs li.active {
-    border-color: var(--sl-color-text-accent);
+    border-color: var(--color-text-accent);
   }
 
   .secondary-nav-tabs li:not(:last-child) {
-    margin-inline-end: 0.75rem;
+    margin-inline-end: 12px;
+  }
+
+  .secondary-nav-tabs {
+    & li {
+      .stl-ui-button {
+        border-width: 0;
+        padding: 8px 12px;
+        margin-inline: -12px;
+      }
+    }
   }
 
   .secondary-nav-tabs a {
@@ -140,16 +195,13 @@ const currentPath = Astro.url.pathname;
       --sl-nav-height: 88px;
     }
 
-    header.header {
-      display: flex;
-      flex-direction: column;
-      gap: 0.29rem;
-      padding-bottom: 0;
-    }
-
     .header {
       padding-inline-start: 0;
       padding-inline-end: 0;
+    }
+
+    .secondary-nav-tabs {
+      display: block;
     }
 
     .top-container {
