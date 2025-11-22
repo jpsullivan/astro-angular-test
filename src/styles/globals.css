@@ -143,6 +143,26 @@
     --sl-menu-button-size: var(--sl-button-size);
     --sl-nav-gap: .5rem;
     --sl-icon-color: var(--sl-color-text);
+
+	/* Button Component Variables */
+	--stl-ui-inverse-foreground: oklch(1 0 0);
+	--stl-ui-inverse-background: oklch(0.2 0 0);
+	--stl-ui-background: oklch(1 0 0);
+	--stl-ui-foreground: oklch(0.21 0.002 17.3);
+	--stl-ui-card-background: oklch(1 0 0);
+	--stl-ui-border: oklch(0.92 0.0035 39.5);
+	--stl-ui-border-emphasis: oklch(0.86 0.01 0);
+	--stl-ui-muted-background: oklch(0.97 0 0);
+	--stl-ui-swatch-gray-white: oklch(1 0 0);
+	--stl-ui-swatch-green-base: oklch(0.63 0.17 146.8);
+	--stl-ui-swatch-red-base: oklch(0.62 0.2 25);
+	--stl-ui-layout-border-radius-sml: 0.5rem;
+	--stl-ui-layout-border-radius-xs: 0.375rem;
+	--stl-ui-layout-border-radius: 0.675rem;
+	--stl-ui-type-scale-text-sm: 0.875rem;
+	--stl-ui-typography-text-body-xs: 0.75rem;
+	--stl-ui-typography-text-body: 1rem;
+	--stl-ui-typography-font: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 :root[data-theme=light] {
@@ -201,6 +221,18 @@
 	--status-at-risk-fg: oklch(0.88 0.18 95.1);
 	--status-off-track-bg: oklch(0.7 0.18 23 / 0.25);
 	--status-off-track-fg: oklch(0.7 0.18 23);
+
+	/* Button Component Variables - Dark Mode */
+	--stl-ui-inverse-foreground: oklch(0.2 0 0);
+	--stl-ui-inverse-background: oklch(0.97 0.012 275);
+	--stl-ui-background: oklch(0.16 0.02 283.51);
+	--stl-ui-foreground: oklch(0.97 0.012 275);
+	--stl-ui-card-background: oklch(0.23 0.02 285.2);
+	--stl-ui-border: oklch(0.3 0.01 0);
+	--stl-ui-border-emphasis: oklch(0.4 0.01 0);
+	--stl-ui-muted-background: oklch(0.27 0.018 275);
+	--stl-ui-swatch-green-base: oklch(0.73 0.18 146);
+	--stl-ui-swatch-red-base: oklch(0.74 0.2 25);
 }
 
 @layer base {
@@ -219,4 +251,144 @@
 	padding: 1rem var(--sl-sidebar-pad-x) 0;
 	flex-direction: column;
 	gap: 1rem;
+}
+
+/* Button Component Styles */
+.stl-ui-button {
+    --stl-ui-button-color: var(--stl-ui-inverse-foreground);
+    --stl-ui-button-background-color: var(--stl-ui-inverse-background);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-inverse-background) 90%, var(--stl-ui-background) );
+    --stl-ui-button-border-color: transparent;
+    --stl-ui-button-border-color-hover: transparent;
+    --stl-ui-button-height: 32px;
+    --stl-ui-button-padding: 8px 10px;
+    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-sml);
+    --stl-ui-button-line-height: 150%;
+    --stl-ui-button-font-weight: 500;
+    --stl-ui-button-font-size: var(--stl-ui-type-scale-text-sm);
+    --stl-ui-button-font-family: var(--stl-ui-typography-font);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    height: var(--stl-ui-button-height);
+    padding: var(--stl-ui-button-padding);
+    border-radius: var(--stl-ui-button-border-radius);
+    line-height: var(--stl-ui-button-line-height);
+    font-weight: var(--stl-ui-button-font-weight);
+    font-size: var(--stl-ui-button-font-size);
+    border: 1px solid var(--stl-ui-button-border-color);
+    font-family: var(--stl-ui-button-font-family);
+    color: var(--stl-ui-button-color);
+    background-color: var(--stl-ui-button-background-color);
+    &:hover {
+        background-color: var(--stl-ui-button-background-color-hover);
+        border-color: var(--stl-ui-button-border-color-hover)
+    }
+
+    &[hidden] {
+        display: none
+    }
+}
+
+.stl-ui-button--accent {
+    --stl-ui-button-color: var(--stl-ui-accent-foreground);
+    --stl-ui-button-background-color: var(--stl-ui-accent-background);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-accent-background) 90%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--accent-muted {
+    --stl-ui-button-color: var(--stl-ui-accent-muted-foreground);
+    --stl-ui-button-background-color: var(--stl-ui-accent-muted-background);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-accent-background) 10%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--muted {
+    --stl-ui-button-color: var(--stl-ui-foreground);
+    --stl-ui-button-background-color: var(--stl-ui-muted-background);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 10%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--outline {
+    --stl-ui-button-color: var(--stl-ui-foreground);
+    --stl-ui-button-background-color: var(--stl-ui-card-background);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 5%, var(--stl-ui-inverse-foreground) );
+    --stl-ui-button-border-color: var(--stl-ui-border);
+    --stl-ui-button-border-color-hover: var(--stl-ui-border-emphasis)
+}
+
+.stl-ui-button--ghost {
+    --stl-ui-button-color: var(--stl-ui-foreground);
+    --stl-ui-button-background-color: transparent;
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-foreground) 5%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--success {
+    --stl-ui-button-color: var(--stl-ui-swatch-gray-white);
+    --stl-ui-button-background-color: var(--stl-ui-swatch-green-base);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-swatch-green-base) 90%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--destructive {
+    --stl-ui-button-color: var(--stl-ui-swatch-gray-white);
+    --stl-ui-button-background-color: var(--stl-ui-swatch-red-base);
+    --stl-ui-button-background-color-hover: color-mix( in oklch, var(--stl-ui-swatch-red-base) 90%, var(--stl-ui-inverse-foreground) )
+}
+
+.stl-ui-button--size-sm {
+    --stl-ui-button-height: 24px;
+    --stl-ui-button-padding: 0 6px;
+    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-xs);
+    --stl-ui-button-line-height: 100%;
+    --stl-ui-button-font-weight: 500;
+    --stl-ui-button-font-size: var(--stl-ui-typography-text-body-xs)
+}
+
+.stl-ui-button--size-lg {
+    --stl-ui-button-height: 40px;
+    --stl-ui-button-padding: 8px 14px;
+    --stl-ui-button-border-radius: var(--stl-ui-layout-border-radius);
+    --stl-ui-button-line-height: 150%;
+    --stl-ui-button-font-weight: 500;
+    --stl-ui-button-font-size: var(--stl-ui-typography-text-body)
+}
+
+.stl-ui-button__icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+        margin-top: 0
+    }
+}
+
+.stl-ui-button:has(.stl-ui-button__icon:first-child) .stl-ui-button__icon {
+    margin-left: -4px;
+    margin-right: 4px
+}
+
+.stl-ui-button:has(.stl-ui-button__icon:last-child) .stl-ui-button__icon {
+    margin-right: -4px;
+    margin-left: 4px;
+    &:first-child {
+        margin-left: -4px;
+        margin-right: 4px
+    }
+}
+
+.stl-ui-button:not(:has(.stl-ui-button-label)):has(.stl-ui-button__icon:last-child):has(.stl-ui-button__icon:first-child) {
+    width: var(--stl-ui-button-height);
+    .stl-ui-button__icon {
+        margin-left: -4px;
+        margin-right: -4px
+    }
+}
+
+a.stl-ui-button {
+    text-decoration: none;
+    text-align: center
 }

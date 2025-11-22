@@ -1,0 +1,52 @@
+---
+interface Props {
+  variant?: 'default' | 'accent' | 'accent-muted' | 'muted' | 'outline' | 'ghost' | 'success' | 'destructive';
+  size?: 'sm' | 'default' | 'lg';
+  href?: string;
+  target?: string;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  size = 'default',
+  href,
+  target,
+  class: className = ''
+} = Astro.props;
+
+// Build class list
+const variantClass = variant !== 'default' ? `stl-ui-button--${variant}` : '';
+const sizeClass = size !== 'default' ? `stl-ui-button--size-${size}` : '';
+const classes = [
+  'stl-ui-button',
+  variantClass,
+  sizeClass,
+  'not-content',
+  'stl-ui-not-prose',
+  className
+].filter(Boolean).join(' ');
+
+const Element = href ? 'a' : 'button';
+---
+
+<Element
+  variant={variant}
+  href={href}
+  target={target}
+  class={classes}
+>
+  {Astro.slots.has('icon-left') && (
+    <span class="stl-ui-button__icon">
+      <slot name="icon-left" />
+    </span>
+  )}
+  <span class="stl-ui-button-label leading-none">
+    <slot />
+  </span>
+  {Astro.slots.has('icon-right') && (
+    <span class="stl-ui-button__icon">
+      <slot name="icon-right" />
+    </span>
+  )}
+</Element>
