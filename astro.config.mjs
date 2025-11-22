@@ -1,6 +1,7 @@
 import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 import angular from '@analogjs/astro-angular';
+import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
@@ -8,6 +9,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: 'Angular Components Docs',
+      customCss: ['./src/styles/globals.css'],
       components: {
         Header: './src/components/overrides/Header.astro',
         Sidebar: './src/components/overrides/Sidebar.astro',
@@ -79,6 +81,7 @@ export default defineConfig({
           items: [
             { label: 'Overview', link: '/components/' },
             { label: 'Badge', link: '/components/badge/' },
+            { label: 'Input', link: '/components/input/' },
           ],
         },
         {
@@ -100,6 +103,7 @@ export default defineConfig({
     }),
   ],
   vite: {
+    plugins: [tailwindcss()],
     build: {
       target: 'es2022',
     },

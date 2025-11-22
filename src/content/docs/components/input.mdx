@@ -1,0 +1,330 @@
+---
+title: Input
+description: A form input directive built with @spartan-ng/brain, class-variance-authority, and clsx.
+---
+
+import { InputDemoComponent } from '../../../components/input-demo.component';
+
+The Input directive is a powerful form control that extends the `@spartan-ng/brain` package with advanced features like error state tracking, form validation integration, and class variance management.
+
+## Live Demo
+
+<InputDemoComponent client:only="angular" />
+
+## Installation
+
+First, install the required dependencies:
+
+```bash
+npm install @spartan-ng/brain class-variance-authority clsx @angular/forms
+```
+
+Then, copy the component files into your project:
+
+### Utils (utils.ts)
+
+```typescript
+import { clsx, type ClassValue } from 'clsx';
+
+/**
+ * Utility function to merge class names
+ * Combines clsx for conditional classes
+ */
+export function cn(...inputs: ClassValue[]) {
+	return clsx(inputs);
+}
+```
+
+### Input Component (input.component.ts)
+
+```typescript
+import {
+	computed,
+	Directive,
+	type DoCheck,
+	effect,
+	forwardRef,
+	inject,
+	Injector,
+	input,
+	linkedSignal,
+	signal,
+	untracked,
+} from '@angular/core';
+import { FormGroupDirective, NgControl, NgForm } from '@angular/forms';
+import { BrnFormFieldControl } from '@spartan-ng/brain/form-field';
+import { ErrorStateMatcher, ErrorStateTracker } from '@spartan-ng/brain/forms';
+import { cn } from './utils';
+import { cva, type VariantProps } from 'class-variance-authority';
+import type { ClassValue } from 'clsx';
+
+export const inputVariants = cva(
+	'file:text-foreground placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-input focus-visible:border-ring focus-visible:ring-ring/50 flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-base shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
+	{
+		variants: {
+			error: {
+				auto: '[&.ng-invalid.ng-touched]:border-destructive [&.ng-invalid.ng-touched]:ring-destructive/20 dark:[&.ng-invalid.ng-touched]:ring-destructive/40',
+				true: 'border-destructive focus-visible:border-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40',
+			},
+		},
+		defaultVariants: {
+			error: 'auto',
+		},
+	},
+);
+type InputVariants = VariantProps<typeof inputVariants>;
+
+@Directive({
+	selector: '[hlmInput]',
+	providers: [
+		{
+			provide: BrnFormFieldControl,
+			useExisting: forwardRef(() => HlmInput),
+		},
+	],
+	host: {
+		'[class]': '_computedClass()',
+	},
+})
+export class HlmInput implements BrnFormFieldControl, DoCheck {
+	private readonly _injector = inject(Injector);
+	private readonly _additionalClasses = signal<ClassValue>('');
+
+	private readonly _errorStateTracker: ErrorStateTracker;
+
+	private readonly _defaultErrorStateMatcher = inject(ErrorStateMatcher);
+	private readonly _parentForm = inject(NgForm, { optional: true });
+	private readonly _parentFormGroup = inject(FormGroupDirective, { optional: true });
+
+	public readonly userClass = input<ClassValue>('', { alias: 'class' });
+	protected readonly _computedClass = computed(() =>
+		cn(inputVariants({ error: this._state().error }), this.userClass(), this._additionalClasses()),
+	);
+
+	public readonly error = input<InputVariants['error']>('auto');
+
+	protected readonly _state = linkedSignal(() => ({ error: this.error() }));
+
+	public readonly ngControl: NgControl | null = this._injector.get(NgControl, null);
+
+	public readonly errorState = computed(() => this._errorStateTracker.errorState());
+
+	constructor() {
+		this._errorStateTracker = new ErrorStateTracker(
+			this._defaultErrorStateMatcher,
+			this.ngControl,
+			this._parentFormGroup,
+			this._parentForm,
+		);
+
+		effect(() => {
+			const error = this._errorStateTracker.errorState();
+			untracked(() => {
+				if (this.ngControl) {
+					const shouldShowError = error && this.ngControl.invalid && (this.ngControl.touched || this.ngControl.dirty);
+					this._errorStateTracker.errorState.set(shouldShowError ? true : false);
+					this.setError(shouldShowError ? true : 'auto');
+				}
+			});
+		});
+	}
+
+	ngDoCheck() {
+		this._errorStateTracker.updateErrorState();
+	}
+
+	setError(error: InputVariants['error']) {
+		this._state.set({ error });
+	}
+
+	setClass(classes: string): void {
+		this._additionalClasses.set(classes);
+	}
+}
+```
+
+## Usage
+
+Import the `HlmInput` directive and use it with native HTML input elements:
+
+### Basic Usage
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-my-component',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<input type="text" placeholder="Enter text..." hlmInput />
+		<input type="email" placeholder="email@example.com" hlmInput />
+		<input type="password" placeholder="Password..." hlmInput />
+	`
+})
+export class MyComponent {}
+```
+
+### With Forms
+
+```typescript
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-form-component',
+	standalone: true,
+	imports: [HlmInput, ReactiveFormsModule],
+	template: `
+		<form [formGroup]="form">
+			<input
+				type="text"
+				placeholder="Username..."
+				hlmInput
+				formControlName="username"
+			/>
+			<input
+				type="email"
+				placeholder="Email..."
+				hlmInput
+				formControlName="email"
+			/>
+		</form>
+	`
+})
+export class FormComponent {
+	form = new FormGroup({
+		username: new FormControl('', [Validators.required]),
+		email: new FormControl('', [Validators.required, Validators.email]),
+	});
+}
+```
+
+### Manual Error State
+
+```typescript
+<input
+	type="text"
+	placeholder="Error state..."
+	hlmInput
+	[error]="true"
+/>
+```
+
+## Features
+
+### Error State Tracking
+
+The Input directive automatically integrates with Angular Forms to track and display error states:
+
+- **Auto Mode** (default): Automatically shows error state when the input is invalid and touched
+- **Manual Mode**: Set `[error]="true"` to manually control the error state
+
+### Class Variance Authority Integration
+
+The directive uses `class-variance-authority` (CVA) to manage class variants, providing:
+
+- Type-safe variant props
+- Composable class names
+- Dark mode support
+- Responsive styles
+
+### Spartan-ng/brain Integration
+
+Built on top of the `@spartan-ng/brain` package for:
+
+- Form field control integration
+- Error state matching
+- Error state tracking
+- Angular Forms compatibility
+
+## API
+
+### Directive Inputs
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `error` | `'auto' \| true` | `'auto'` | Controls the error state display |
+| `class` | `ClassValue` | `''` | Additional CSS classes to apply |
+
+### Methods
+
+| Method | Parameters | Description |
+|--------|-----------|-------------|
+| `setError(error)` | `error: 'auto' \| true` | Programmatically set the error state |
+| `setClass(classes)` | `classes: string` | Programmatically add additional classes |
+
+### Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `errorState` | `Signal<boolean>` | Computed signal for the current error state |
+| `ngControl` | `NgControl \| null` | Reference to the Angular form control |
+
+## Styling
+
+The Input directive uses Tailwind CSS utility classes for styling. The base styles include:
+
+- Rounded corners with border
+- Focus ring effect
+- Disabled state styling
+- File input support
+- Placeholder text styling
+- Dark mode support
+- Error state styling with destructive colors
+
+## Accessibility
+
+- The directive works with native HTML input elements, maintaining all standard accessibility features
+- Error states are visually indicated with color and border changes
+- Disabled state is properly handled with reduced opacity and pointer-events
+- Supports all standard input types (text, email, password, file, etc.)
+
+## Examples
+
+### Login Form
+
+```typescript
+<form [formGroup]="loginForm">
+	<label for="email">Email</label>
+	<input
+		id="email"
+		type="email"
+		placeholder="email@example.com"
+		hlmInput
+		formControlName="email"
+	/>
+
+	<label for="password">Password</label>
+	<input
+		id="password"
+		type="password"
+		placeholder="Enter password..."
+		hlmInput
+		formControlName="password"
+	/>
+</form>
+```
+
+### File Upload
+
+```typescript
+<input
+	type="file"
+	hlmInput
+	accept=".pdf,.doc,.docx"
+/>
+```
+
+### Disabled Input
+
+```typescript
+<input
+	type="text"
+	placeholder="Read only..."
+	hlmInput
+	disabled
+/>
+```
