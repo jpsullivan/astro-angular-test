@@ -10,83 +10,201 @@ import LanguageSelect from '@astrojs/starlight/components/LanguageSelect.astro';
 const currentPath = Astro.url.pathname;
 ---
 
-<div class="header sl-flex">
-  <SiteTitle {...Astro.props} />
-  <nav class="custom-nav-links" aria-label="Main">
-    <a
-      href="/start/"
-      class:list={['nav-link', { active: currentPath.startsWith('/start') }]}
-    >
-      Start
-    </a>
-    <a
-      href="/deploy/"
-      class:list={['nav-link', { active: currentPath.startsWith('/deploy') }]}
-    >
-      Deploy
-    </a>
-    <a
-      href="/components/"
-      class:list={['nav-link', { active: currentPath.startsWith('/components') }]}
-    >
-      Components
-    </a>
-  </nav>
-  <div class="sl-hidden md:sl-flex right-group">
-    <Search {...Astro.props} />
-    <SocialIcons {...Astro.props} />
-    <ThemeSelect {...Astro.props} />
-    <LanguageSelect {...Astro.props} />
+<header class="header">
+  <div class="header-top">
+    <div class="left-group">
+      <div class="title-wrapper sl-flex">
+        <SiteTitle {...Astro.props} />
+      </div>
+    </div>
+
+    <div class="top-container">
+      <Search {...Astro.props} />
+    </div>
+
+    <div class="sl-hidden md:sl-flex right-group">
+      <ThemeSelect {...Astro.props} />
+      <a href="mailto:feedback@yourdomain.com" class="action-link">
+        Feedback
+      </a>
+      <a href="https://app.yourdomain.com" target="_blank" class="action-link action-link-primary">
+        Dashboard
+      </a>
+    </div>
   </div>
-</div>
+
+  <div class="secondary-nav-tabs">
+    <nav aria-label="Main">
+      <ul>
+        <li class:list={[{ active: currentPath.startsWith('/start') }]}>
+          <a href="/start/">Start</a>
+        </li>
+        <li class:list={[{ active: currentPath.startsWith('/deploy') }]}>
+          <a href="/deploy/">Deploy</a>
+        </li>
+        <li class:list={[{ active: currentPath.startsWith('/components') }]}>
+          <a href="/components/">Components</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
 <style>
   .header {
-    gap: var(--sl-nav-gap);
+    border-bottom: 1px solid var(--sl-color-hairline);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    height: 100%;
+    gap: var(--sl-nav-gap);
+    padding: 0.75rem 1rem;
   }
 
-  .custom-nav-links {
-    display: flex;
-    gap: 1rem;
-    align-items: stretch;
-    margin-inline-end: auto;
-    margin-inline-start: 1rem;
-    height: 100%;
-  }
-
-  .nav-link {
-    height: 100%;
-    padding: 0.5rem 0;
-    border-bottom: 2px solid transparent;
-    font-weight: var(--font-weight-bold);
-    text-decoration: none;
-    color: var(--heading-text-color);
-    transition: color 0.2s;
-    white-space: nowrap;
+  .left-group {
     display: flex;
     align-items: center;
-    font-size: var(--sl-text-sm);
   }
 
-  .nav-link:hover {
-    color: var(--sl-color-white);
+  .title-wrapper {
+    display: flex;
+    align-items: center;
   }
 
-  .nav-link.active {
-    border-color: var(--teal-200);
+  .top-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    max-width: 600px;
   }
 
   .right-group {
-    gap: 1rem;
+    display: flex;
+    gap: 0.75rem;
     align-items: center;
   }
 
-  @media (max-width: 30rem) {
-    .custom-nav-links {
-      display: none;
+  .action-link {
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    border: 1px solid var(--sl-color-gray-5);
+    color: var(--sl-color-white);
+    background: transparent;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+
+  .action-link:hover {
+    background: var(--sl-color-gray-6);
+    border-color: var(--sl-color-gray-4);
+  }
+
+  .action-link-primary {
+    background: var(--sl-color-text-accent);
+    border-color: var(--sl-color-text-accent);
+    color: var(--sl-color-black);
+  }
+
+  .action-link-primary:hover {
+    opacity: 0.9;
+  }
+
+  .secondary-nav-tabs {
+    border-top: 1px solid var(--sl-color-hairline-shade);
+  }
+
+  .secondary-nav-tabs nav {
+    padding: 0 1rem;
+  }
+
+  .secondary-nav-tabs ul {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    gap: 0.25rem;
+  }
+
+  .secondary-nav-tabs li {
+    padding-bottom: 1px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+
+  .secondary-nav-tabs li.active {
+    border-color: var(--sl-color-text-accent);
+  }
+
+  .secondary-nav-tabs li:not(:last-child) {
+    margin-inline-end: 0.75rem;
+  }
+
+  .secondary-nav-tabs a {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    font-size: var(--sl-text-sm);
+    font-weight: 500;
+    text-decoration: none;
+    color: var(--sl-color-gray-2);
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+
+  .secondary-nav-tabs li.active a {
+    color: var(--sl-color-white);
+  }
+
+  .secondary-nav-tabs a:hover {
+    color: var(--sl-color-white);
+  }
+
+  @media (min-width: 50rem) {
+    :root {
+      --sl-nav-height: 88px;
+    }
+
+    header.header {
+      display: flex;
+      flex-direction: column;
+      gap: 0.29rem;
+      padding-bottom: 0;
+    }
+
+    .header {
+      padding-inline-start: 0;
+      padding-inline-end: 0;
+    }
+
+    .top-container {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 50rem) {
+    .header-top {
+      flex-wrap: wrap;
+    }
+
+    .top-container {
+      order: 3;
+      width: 100%;
+      max-width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .secondary-nav-tabs {
+      overflow-x: auto;
+    }
+
+    .secondary-nav-tabs ul {
+      min-width: min-content;
     }
   }
 </style>

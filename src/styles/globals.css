@@ -116,6 +116,44 @@
 	--status-at-risk-fg: oklch(0.74 0.17 91.4);
 	--status-off-track-bg: oklch(0.57 0.2 22.7 / 0.25);
 	--status-off-track-fg: oklch(0.57 0.2 22.7);
+
+	/* Page Layout */
+	--sl-page-max-width: 90rem;
+
+	/* Button Styles */
+	--stl-ui-button-height: 32px;
+	--stl-ui-button-padding: 8px 10px;
+	--stl-ui-button-border-radius: var(--stl-ui-layout-border-radius-sml);
+	--stl-ui-button-line-height: 150%;
+	--stl-ui-button-font-weight: 500;
+	--stl-ui-button-font-size: var(--stl-ui-type-scale-text-sm);
+	--stl-ui-button-font-family: var(--stl-ui-typography-font);
+
+	--sl-color-bg-table-row: #ffffff0a;
+    --sl-button-border-radius: 8px;
+    --sl-text-body-sm: .86rem;
+    --sl-content-width: 52rem;
+    --sl-nav-pad-y: .5rem;
+    --sl-nav-height: 56px;
+    --sl-sidebar-width: 19rem;
+    --sl-button-size: 32px;
+    --sl-button-padding-x: .75rem;
+    --sl-button-padding-y: .5rem;
+    --sl-button-icon-offset: .2rem;
+    --sl-menu-button-size: var(--sl-button-size);
+    --sl-nav-gap: .5rem;
+    --sl-icon-color: var(--sl-color-text);
+}
+
+:root[data-theme=light] {
+	--stl-ui-foreground-accent: #0a0a0a;
+	--stl-ui-accent-background: #0a0a0a;
+	--stl-ui-accent-foreground: #ffffff;
+	--stl-ui-accent-muted-background: #f5f5f5;
+	--stl-ui-accent-muted-foreground: #0a0a0a;
+	--stl-ui-accent-border: #e5e5e5;
+	--stl-ui-accent-border-muted: #f5f5f5;
+	--stl-ui-accent-border-emphasis: #d4d4d4;
 }
 
 .dark {
@@ -172,4 +210,13 @@
 	body {
 		@apply bg-background text-foreground;
 	}
+}
+
+/* Sidebar Styles */
+.sidebar-content:where(.astro-jyino6jq) {
+	height: 100%;
+	min-height: max-content;
+	padding: 1rem var(--sl-sidebar-pad-x) 0;
+	flex-direction: column;
+	gap: 1rem;
 }
