@@ -1,11 +1,13 @@
 ---
-import type { Props } from '@astrojs/starlight/props';
-import Default from '@astrojs/starlight/components/Sidebar.astro';
+import MobileMenuFooter from '@astrojs/starlight/components/MobileMenuFooter.astro';
+import SidebarPersister from '@astrojs/starlight/components/SidebarPersister.astro';
+import SidebarSublist from '@astrojs/starlight/components/SidebarSublist.astro';
 
-// Get the current path to determine active nav item
+// Get the sidebar from Starlight's route data
+const fullSidebar = Astro.locals.starlightRoute.sidebar;
 const currentPath = Astro.url.pathname;
 
-// Define which sidebar section should be shown based on the active nav
+// Define which sidebar sections should be shown based on the active nav
 let activeSections: string[] = ['Getting Started']; // Always show Getting Started
 
 if (currentPath.startsWith('/start')) {
@@ -20,16 +22,20 @@ if (currentPath.startsWith('/start')) {
 }
 
 // Filter the sidebar to only show relevant sections
-// Check if sidebar exists before filtering
-const filteredSidebar = Astro.props.sidebar?.filter((section) => {
-  return activeSections.includes(section.label);
-}) || [];
-
-// Create new props with filtered sidebar
-const newProps = {
-  ...Astro.props,
-  sidebar: filteredSidebar,
-};
+const filteredSidebar = fullSidebar.filter((entry: any) => {
+  // Keep group entries that match our active sections
+  if (entry.type === 'group') {
+    return activeSections.includes(entry.label);
+  }
+  // Keep non-group entries (links)
+  return true;
+});
 ---
 
-<Default {...newProps} />
+<SidebarPersister>
+	<SidebarSublist sublist={filteredSidebar} />
+</SidebarPersister>
+
+<div class="md:sl-hidden">
+	<MobileMenuFooter />
+</div>
