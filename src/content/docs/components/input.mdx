@@ -3,13 +3,149 @@ title: Input
 description: A form input directive built with @spartan-ng/brain, class-variance-authority, and clsx.
 ---
 
-import { InputDemoComponent } from '../../../components/input-demo.component';
+import { InputDefaultComponent } from '../../../components/examples/input-default.component';
+import { InputDisabledComponent } from '../../../components/examples/input-disabled.component';
+import { InputFileComponent } from '../../../components/examples/input-file.component';
+import { InputWithLabelComponent } from '../../../components/examples/input-with-label.component';
+import { InputWithButtonComponent } from '../../../components/examples/input-with-button.component';
+import { InputFormComponent } from '../../../components/examples/input-form.component';
 
 The Input directive is a powerful form control that extends the `@spartan-ng/brain` package with advanced features like error state tracking, form validation integration, and class variance management.
 
-## Live Demo
+## Examples
 
-<InputDemoComponent client:only="angular" />
+### Default
+
+<InputDefaultComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<input type="email" placeholder="Email" hlmInput />
+	`,
+})
+export class ExampleComponent {}
+```
+
+### Disabled
+
+<InputDisabledComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<input type="email" placeholder="Email" hlmInput disabled />
+	`,
+})
+export class ExampleComponent {}
+```
+
+### File
+
+<InputFileComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<div class="grid w-full max-w-sm items-center gap-1.5">
+			<label for="picture">Picture</label>
+			<input id="picture" type="file" hlmInput />
+		</div>
+	`,
+})
+export class ExampleComponent {}
+```
+
+### With Label
+
+<InputWithLabelComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<div class="grid w-full max-w-sm items-center gap-1.5">
+			<label for="email">Email</label>
+			<input type="email" id="email" placeholder="Email" hlmInput />
+		</div>
+	`,
+})
+export class ExampleComponent {}
+```
+
+### With Button
+
+<InputWithButtonComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput],
+	template: `
+		<div class="flex w-full max-w-sm items-center space-x-2">
+			<input type="email" placeholder="Email" hlmInput />
+			<button type="submit">Subscribe</button>
+		</div>
+	`,
+})
+export class ExampleComponent {}
+```
+
+### Form
+
+<InputFormComponent client:only="angular" />
+
+```typescript
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { HlmInput } from './input.component';
+
+@Component({
+	selector: 'app-example',
+	standalone: true,
+	imports: [HlmInput, ReactiveFormsModule],
+	template: `
+		<form [formGroup]="form" class="w-2/3 space-y-6">
+			<div class="grid w-full max-w-sm items-center gap-1.5">
+				<label for="username">Username</label>
+				<input type="text" id="username" placeholder="Username" hlmInput formControlName="username" />
+			</div>
+		</form>
+	`,
+})
+export class ExampleComponent {
+	form = new FormGroup({
+		username: new FormControl('', [Validators.required]),
+	});
+}
+```
 
 ## Installation
 
@@ -147,70 +283,19 @@ export class HlmInput implements BrnFormFieldControl, DoCheck {
 
 Import the `HlmInput` directive and use it with native HTML input elements:
 
-### Basic Usage
-
 ```typescript
 import { Component } from '@angular/core';
 import { HlmInput } from './input.component';
 
 @Component({
-	selector: 'app-my-component',
+	selector: 'app-example',
 	standalone: true,
 	imports: [HlmInput],
 	template: `
-		<input type="text" placeholder="Enter text..." hlmInput />
-		<input type="email" placeholder="email@example.com" hlmInput />
-		<input type="password" placeholder="Password..." hlmInput />
-	`
+		<input type="email" placeholder="Email" hlmInput />
+	`,
 })
-export class MyComponent {}
-```
-
-### With Forms
-
-```typescript
-import { Component } from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HlmInput } from './input.component';
-
-@Component({
-	selector: 'app-form-component',
-	standalone: true,
-	imports: [HlmInput, ReactiveFormsModule],
-	template: `
-		<form [formGroup]="form">
-			<input
-				type="text"
-				placeholder="Username..."
-				hlmInput
-				formControlName="username"
-			/>
-			<input
-				type="email"
-				placeholder="Email..."
-				hlmInput
-				formControlName="email"
-			/>
-		</form>
-	`
-})
-export class FormComponent {
-	form = new FormGroup({
-		username: new FormControl('', [Validators.required]),
-		email: new FormControl('', [Validators.required, Validators.email]),
-	});
-}
-```
-
-### Manual Error State
-
-```typescript
-<input
-	type="text"
-	placeholder="Error state..."
-	hlmInput
-	[error]="true"
-/>
+export class ExampleComponent {}
 ```
 
 ## Features
@@ -281,50 +366,3 @@ The Input directive uses Tailwind CSS utility classes for styling. The base styl
 - Error states are visually indicated with color and border changes
 - Disabled state is properly handled with reduced opacity and pointer-events
 - Supports all standard input types (text, email, password, file, etc.)
-
-## Examples
-
-### Login Form
-
-```typescript
-<form [formGroup]="loginForm">
-	<label for="email">Email</label>
-	<input
-		id="email"
-		type="email"
-		placeholder="email@example.com"
-		hlmInput
-		formControlName="email"
-	/>
-
-	<label for="password">Password</label>
-	<input
-		id="password"
-		type="password"
-		placeholder="Enter password..."
-		hlmInput
-		formControlName="password"
-	/>
-</form>
-```
-
-### File Upload
-
-```typescript
-<input
-	type="file"
-	hlmInput
-	accept=".pdf,.doc,.docx"
-/>
-```
-
-### Disabled Input
-
-```typescript
-<input
-	type="text"
-	placeholder="Read only..."
-	hlmInput
-	disabled
-/>
-```
