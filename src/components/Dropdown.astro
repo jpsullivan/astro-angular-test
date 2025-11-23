@@ -2,9 +2,10 @@
 export interface Props {
   id?: string;
   class?: string;
+  [key: string]: any;
 }
 
-const { id = "dropdown", class: className = "" } = Astro.props;
+const { id = "dropdown", class: className = "", ...rest } = Astro.props;
 ---
 
 <div
@@ -13,6 +14,7 @@ const { id = "dropdown", class: className = "" } = Astro.props;
   aria-expanded="false"
   class:list={["stl-ui-dropdown stl-ui-not-prose not-content", className]}
   data-dropdown-id={id}
+  {...rest}
 >
   <slot />
 </div>
@@ -20,6 +22,11 @@ const { id = "dropdown", class: className = "" } = Astro.props;
 <script>
   class DropdownController {
     constructor(element: HTMLElement) {
+      // Prevent duplicate initialization
+      if ((element as any).__dropdownController) {
+        return (element as any).__dropdownController;
+      }
+
       this.element = element;
       this.trigger = element.querySelector('[data-part="trigger"]') as HTMLButtonElement;
       this.menu = element.querySelector('[data-part="menu"]') as HTMLElement;
@@ -27,13 +34,14 @@ const { id = "dropdown", class: className = "" } = Astro.props;
 
       if (!this.trigger || !this.menu) return;
 
+      (element as any).__dropdownController = this;
       this.init();
     }
 
-    element: HTMLElement;
-    trigger: HTMLButtonElement;
-    menu: HTMLElement;
-    items: HTMLButtonElement[];
+    element!: HTMLElement;
+    trigger!: HTMLButtonElement;
+    menu!: HTMLElement;
+    items!: HTMLButtonElement[];
     isOpen = false;
 
     init() {

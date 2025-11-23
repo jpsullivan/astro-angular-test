@@ -84,14 +84,25 @@ const { class: className = "" } = Astro.props;
 
   class ThemeController {
     private readonly STORAGE_KEY = 'starlight-theme';
+    private dropdown: HTMLElement | null = null;
+    private eventListenerAttached = false;
 
     constructor() {
       this.init();
     }
 
     init() {
-      const dropdown = document.querySelector('[data-theme-select="true"]');
-      if (!dropdown) return;
+      this.dropdown = document.querySelector('[data-theme-select="true"]');
+      if (!this.dropdown) {
+        console.warn('ThemeSelect dropdown not found');
+        return;
+      }
+
+      // Prevent duplicate event listener
+      if ((this.dropdown as any).__themeController) {
+        return;
+      }
+      (this.dropdown as any).__themeController = this;
 
       // Load saved theme on initial load
       const savedTheme = this.getSavedTheme();
@@ -105,10 +116,14 @@ const { class: className = "" } = Astro.props;
       }
 
       // Listen for theme changes from dropdown
-      dropdown.addEventListener('dropdown:change', ((e: CustomEvent) => {
-        const theme = e.detail.value as Theme;
-        this.setTheme(theme);
-      }) as EventListener);
+      if (!this.eventListenerAttached) {
+        this.dropdown.addEventListener('dropdown:change', (e) => {
+          const theme = (e as CustomEvent).detail.value as Theme;
+          console.log('Theme change event received:', theme);
+          this.setTheme(theme);
+        });
+        this.eventListenerAttached = true;
+      }
     }
 
     private getSavedTheme(): Theme | null {
@@ -118,6 +133,7 @@ const { class: className = "" } = Astro.props;
     }
 
     private setTheme(theme: Theme) {
+      console.log('Setting theme:', theme);
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem(this.STORAGE_KEY, theme);
       }
@@ -143,14 +159,15 @@ const { class: className = "" } = Astro.props;
 
       // Also set data-theme attribute for compatibility
       root.setAttribute('data-theme', theme === 'auto' ? (root.classList.contains('dark') ? 'dark' : 'light') : theme);
+
+      console.log('Theme applied:', theme, 'Dark mode:', root.classList.contains('dark'));
     }
 
     private updateDropdownState(theme: Theme) {
-      const dropdown = document.querySelector('[data-theme-select="true"]');
-      if (!dropdown) return;
+      if (!this.dropdown) return;
 
-      const trigger = dropdown.querySelector('[data-part="trigger"]') as HTMLButtonElement;
-      const items = dropdown.querySelectorAll('[data-part="item"]');
+      const trigger = this.dropdown.querySelector('[data-part="trigger"]') as HTMLButtonElement;
+      const items = this.dropdown.querySelectorAll('[data-part="item"]');
 
       if (trigger) {
         trigger.setAttribute('data-value', theme);
@@ -175,7 +192,10 @@ const { class: className = "" } = Astro.props;
 
   // Initialize theme controller
   function initTheme() {
-    new ThemeController();
+    // Wait a bit for dropdown to be initialized
+    setTimeout(() => {
+      new ThemeController();
+    }, 100);
   }
 
   // Initialize on DOM ready
@@ -193,7 +213,13 @@ const { class: className = "" } = Astro.props;
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
       const savedTheme = localStorage.getItem('starlight-theme') as Theme | null;
       if (savedTheme === 'auto' || !savedTheme) {
-        new ThemeController();
+        const root = document.documentElement;
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (prefersDark) {
+          root.classList.add('dark');
+        } else {
+          root.classList.remove('dark');
+        }
       }
     });
   }
