@@ -1,6 +1,6 @@
 ---
 interface Props {
-  title: string;
+  title?: string;
   tagline?: string;
 }
 
@@ -8,10 +8,12 @@ const { title, tagline } = Astro.props;
 ---
 
 <div class="landing-container">
-  <header class="landing-header">
-    <h1 class="landing-title">{title}</h1>
-    {tagline && <p class="landing-tagline">{tagline}</p>}
-  </header>
+  {title && (
+    <header class="landing-header">
+      <h1 class="landing-title">{title}</h1>
+      {tagline && <p class="landing-tagline">{tagline}</p>}
+    </header>
+  )}
 
   <slot />
 </div>
@@ -39,7 +41,7 @@ const { title, tagline } = Astro.props;
     gap: 64px;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 3rem 2rem;
+    padding: 2rem 2rem 3rem;
     width: 100%;
   }
 
@@ -70,7 +72,7 @@ const { title, tagline } = Astro.props;
   @media (min-width: 1024px) {
     .landing-container {
       gap: 80px;
-      padding: 4rem 3rem;
+      padding: 3rem 3rem 4rem;
     }
 
     .landing-header {
@@ -82,7 +84,7 @@ const { title, tagline } = Astro.props;
   @media (max-width: 768px) {
     .landing-container {
       gap: 40px;
-      padding: 2rem 1.25rem;
+      padding: 1.5rem 1.25rem 2rem;
     }
 
     .landing-header {
