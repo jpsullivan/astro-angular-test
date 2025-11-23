@@ -1,8 +1,7 @@
 ---
-// Starlight passes entry in props for component overrides
-const { entry } = Astro.props;
-const hero = entry?.data?.hero;
-const { title, tagline, actions } = hero || {};
+// Access hero data from Starlight's route locals (the correct way!)
+const { data } = Astro.locals.starlightRoute.entry;
+const { title = data.title, tagline, actions = [] } = data.hero || {};
 ---
 
 <div class="hero-container">
