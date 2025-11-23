@@ -13,6 +13,7 @@ export default defineConfig({
       components: {
         Header: "./src/components/overrides/Header.astro",
         Sidebar: "./src/components/overrides/Sidebar.astro",
+        Hero: "./src/components/overrides/Hero.astro",
       },
       logo: {
         light: "./src/assets/logo-light.svg",
