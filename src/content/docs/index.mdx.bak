@@ -1,0 +1,12 @@
+---
+title: Angular Components Documentation
+description: Production-ready UI components and comprehensive API documentation for modern web applications.
+template: splash
+hero:
+  title: ''
+  tagline: ''
+---
+
+import LandingPage from '@components/LandingPage.astro';
+
+<LandingPage />

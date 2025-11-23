@@ -1,0 +1,561 @@
+---
+// Landing page component
+---
+
+<div class="landing-container">
+  <!-- Background Gradients -->
+  <div class="gradient-orb gradient-orb-1"></div>
+  <div class="gradient-orb gradient-orb-2"></div>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        Built for developers.<br />
+        Designed for scale.
+      </h1>
+      <p class="hero-subtitle">
+        Production-ready Angular components and comprehensive API documentation.<br />
+        Everything you need to build modern web applications.
+      </p>
+
+      <div class="hero-actions">
+        <a href="/start/" class="btn btn-primary">
+          Get started
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="/components/" class="btn btn-secondary">
+          View components
+        </a>
+      </div>
+    </div>
+
+    <!-- Visual Demo -->
+    <div class="hero-visual">
+      <div class="demo-window">
+        <div class="demo-header">
+          <div class="demo-dots">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+        <div class="demo-content">
+          <div class="demo-line"><span class="token-keyword">import</span> <span class="token-punctuation">{</span> Component <span class="token-punctuation">}</span> <span class="token-keyword">from</span> <span class="token-string">'@angular/core'</span><span class="token-punctuation">;</span></div>
+          <div class="demo-line"><span class="token-keyword">import</span> <span class="token-punctuation">{</span> BadgeComponent <span class="token-punctuation">}</span> <span class="token-keyword">from</span> <span class="token-string">'./badge'</span><span class="token-punctuation">;</span></div>
+          <div class="demo-line"></div>
+          <div class="demo-line"><span class="token-decorator">@Component</span><span class="token-punctuation">({</span></div>
+          <div class="demo-line">  standalone<span class="token-punctuation">:</span> <span class="token-boolean">true</span><span class="token-punctuation">,</span></div>
+          <div class="demo-line">  imports<span class="token-punctuation">:</span> <span class="token-punctuation">[</span>BadgeComponent<span class="token-punctuation">],</span></div>
+          <div class="demo-line">  template<span class="token-punctuation">:</span> <span class="token-string">`&lt;app-badge&gt;New&lt;/app-badge&gt;`</span></div>
+          <div class="demo-line"><span class="token-punctuation">})</span></div>
+          <div class="demo-line"><span class="token-keyword">export class</span> <span class="token-class">AppComponent</span> <span class="token-punctuation">{}</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section">
+    <div class="section-header">
+      <h2>Everything you need to ship faster</h2>
+      <p>Developer tools designed for the modern web</p>
+    </div>
+
+    <div class="features-grid">
+      <a href="/components/" class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+              <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+            </svg>
+          </div>
+          <h3>UI Components</h3>
+        </div>
+        <p>Production-ready Angular components built with Spartan Brain. Accessible, customizable, and ready to use.</p>
+        <div class="feature-link">
+          Browse components
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/start/" class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Quick Start</h3>
+        </div>
+        <p>Get up and running in minutes with our comprehensive guides and step-by-step tutorials.</p>
+        <div class="feature-link">
+          Get started
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+
+      <a href="/api/" class="feature-card">
+        <div class="feature-header">
+          <div class="feature-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM17 14l3 3-3 3M20 17h-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>API Reference</h3>
+        </div>
+        <p>Complete API documentation for integrating with our SaaS platform. RESTful endpoints and SDKs.</p>
+        <div class="feature-link">
+          View API docs
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Stats/Features Section -->
+  <section class="stats-section">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-icon">✓</div>
+        <h4>TypeScript</h4>
+        <p>Fully typed for the best DX</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">✓</div>
+        <h4>Accessible</h4>
+        <p>WCAG 2.1 compliant</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">✓</div>
+        <h4>Customizable</h4>
+        <p>Theme system with full control</p>
+      </div>
+      <div class="stat-item">
+        <div class="stat-icon">✓</div>
+        <h4>Live Examples</h4>
+        <p>Interactive component demos</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .landing-container {
+    position: relative;
+    min-height: 100vh;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    overflow: hidden;
+  }
+
+  /* Gradient Orbs - Linear style */
+  .gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px);
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .gradient-orb-1 {
+    top: -200px;
+    right: -100px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  }
+
+  .gradient-orb-2 {
+    bottom: -300px;
+    left: -200px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, oklch(0.65 0.2 290) 0%, transparent 70%);
+  }
+
+  .dark .gradient-orb {
+    opacity: 0.15;
+  }
+
+  /* Hero Section - Linear inspired */
+  .hero-section {
+    position: relative;
+    z-index: 1;
+    max-width: var(--sl-page-max-width);
+    margin: 0 auto;
+    padding: 6rem 1rem 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+
+  @media (min-width: 50rem) {
+    .hero-section {
+      padding-inline: 20px;
+      padding-block: 8rem 6rem;
+    }
+  }
+
+  .hero-content {
+    text-align: center;
+    max-width: 800px;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.5rem 0;
+    background: linear-gradient(
+      180deg,
+      var(--color-foreground) 0%,
+      var(--color-muted-foreground) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+    line-height: 1.7;
+    color: var(--color-muted-foreground);
+    margin: 0 0 3rem 0;
+    font-weight: 400;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* Buttons - Linear style */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px -8px var(--color-primary);
+  }
+
+  .btn-secondary {
+    background: var(--color-card);
+    color: var(--color-foreground);
+    border-color: var(--color-border);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--color-foreground);
+    background: var(--color-muted);
+  }
+
+  /* Demo Window */
+  .hero-visual {
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .demo-window {
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px oklch(0 0 0 / 0.05),
+      0 20px 40px -20px oklch(0 0 0 / 0.3);
+  }
+
+  .demo-header {
+    padding: 1rem;
+    background: var(--color-muted);
+    border-bottom: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+  }
+
+  .demo-dots {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .demo-dots span {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-border);
+  }
+
+  .demo-content {
+    padding: 2rem 1.5rem;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Courier New', monospace;
+    font-size: 0.875rem;
+    line-height: 1.8;
+    color: var(--color-foreground);
+  }
+
+  .demo-line {
+    min-height: 1.8em;
+  }
+
+  .token-keyword {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  .token-string {
+    color: oklch(0.63 0.17 146.8);
+  }
+
+  .token-punctuation {
+    color: var(--color-muted-foreground);
+  }
+
+  .token-decorator {
+    color: oklch(0.6 0.2 35);
+    font-style: italic;
+  }
+
+  .token-boolean {
+    color: oklch(0.65 0.2 290);
+  }
+
+  .token-class {
+    color: oklch(0.6 0.2 35);
+    font-weight: 500;
+  }
+
+  /* Features Section */
+  .features-section {
+    position: relative;
+    z-index: 1;
+    max-width: var(--sl-page-max-width);
+    margin: 0 auto;
+    padding: 4rem 1rem;
+  }
+
+  @media (min-width: 50rem) {
+    .features-section {
+      padding-inline: 20px;
+      padding-block: 6rem;
+    }
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-header h2 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    margin: 0 0 1rem 0;
+  }
+
+  .section-header p {
+    font-size: 1.125rem;
+    color: var(--color-muted-foreground);
+    margin: 0;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .feature-card {
+    position: relative;
+    padding: 2rem;
+    background: var(--color-card);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .feature-card:hover {
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+  }
+
+  .feature-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .feature-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-muted);
+    border-radius: 8px;
+    color: var(--color-primary);
+  }
+
+  .feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .feature-card p {
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-muted-foreground);
+    margin: 0;
+    flex: 1;
+  }
+
+  .feature-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-primary);
+    margin-top: auto;
+  }
+
+  .feature-card:hover .feature-link {
+    gap: 0.75rem;
+  }
+
+  .feature-link svg {
+    transition: transform 0.2s ease;
+  }
+
+  .feature-card:hover .feature-link svg {
+    transform: translateX(4px);
+  }
+
+  /* Stats Section */
+  .stats-section {
+    position: relative;
+    z-index: 1;
+    max-width: var(--sl-page-max-width);
+    margin: 0 auto;
+    padding: 0 1rem 4rem;
+  }
+
+  @media (min-width: 50rem) {
+    .stats-section {
+      padding-inline: 20px;
+      padding-block-end: 6rem;
+    }
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 3rem;
+  }
+
+  .stat-item {
+    text-align: center;
+  }
+
+  .stat-icon {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-primary);
+    color: var(--color-primary-foreground);
+    border-radius: 8px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 auto 1rem;
+  }
+
+  .stat-item h4 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0 0.5rem 0;
+  }
+
+  .stat-item p {
+    font-size: 0.875rem;
+    color: var(--color-muted-foreground);
+    margin: 0;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .hero-section {
+      gap: 3rem;
+    }
+
+    .hero-title {
+      font-size: 2.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+    }
+
+    .section-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+
+    .demo-content {
+      font-size: 0.8125rem;
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
