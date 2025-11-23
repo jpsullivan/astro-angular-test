@@ -1,0 +1,74 @@
+---
+interface Props {
+  title: string;
+  tagline?: string;
+}
+
+const { title, tagline } = Astro.props;
+---
+
+<div class="landing-container">
+  <header class="landing-header">
+    <h1 class="landing-title">{title}</h1>
+    {tagline && <p class="landing-tagline">{tagline}</p>}
+  </header>
+
+  <slot />
+</div>
+
+<style is:global>
+  /* Override Starlight's default content styles for landing page */
+  .landing-container ~ :global(article.sl-container) {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  .landing-container ~ :global(.sl-markdown-content > h1:first-child) {
+    display: none;
+  }
+</style>
+
+<style>
+  .landing-container {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .landing-header {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .landing-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.1;
+    font-weight: 700;
+    margin: 0;
+    color: var(--sl-color-white);
+    letter-spacing: -0.02em;
+  }
+
+  .landing-tagline {
+    font-size: clamp(1rem, 2.5vw, 1.25rem);
+    line-height: 1.6;
+    color: var(--sl-color-gray-2);
+    margin: 0;
+    max-width: 60ch;
+  }
+
+  @media (max-width: 768px) {
+    .landing-container {
+      gap: 32px;
+      padding: 1.5rem 1rem;
+    }
+
+    .landing-header {
+      gap: 8px;
+    }
+  }
+</style>

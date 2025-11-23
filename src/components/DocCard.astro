@@ -1,0 +1,104 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+  icon?: string;
+}
+
+const { title, description, href, icon } = Astro.props;
+---
+
+<a href={href} class="doc-card">
+  {icon && (
+    <div class="doc-card-icon">
+      <Fragment set:html={icon} />
+    </div>
+  )}
+  <div class="doc-card-content">
+    <h3 class="doc-card-title">{title}</h3>
+    <p class="doc-card-description">{description}</p>
+  </div>
+</a>
+
+<style>
+  .doc-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 280px;
+    border: 1px solid oklch(from var(--sl-color-gray-5) l c h / 0.4);
+    background-color: oklch(from var(--sl-color-gray-6) l c h / 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .doc-card:hover {
+    border-color: var(--sl-color-accent);
+    background-color: oklch(from var(--sl-color-gray-6) l c h / 0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px oklch(from var(--sl-color-gray-5) l c h / 0.1);
+  }
+
+  .doc-card-icon {
+    padding: 24px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .doc-card-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+    color: var(--sl-color-accent);
+  }
+
+  .doc-card-content {
+    margin-top: auto;
+    padding: 20px;
+    border-top: 1px solid oklch(from var(--sl-color-gray-5) l c h / 0.4);
+    transition: border-color 0.2s ease;
+  }
+
+  .doc-card:hover .doc-card-content {
+    border-top-color: oklch(from var(--sl-color-accent) l c h / 0.3);
+  }
+
+  .doc-card-title {
+    font-size: 1rem;
+    line-height: 1.5;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .doc-card-description {
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--sl-color-gray-2);
+    margin: 0;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
+    min-height: calc(0.875rem * 1.5 * 3);
+  }
+
+  @media (max-width: 768px) {
+    .doc-card {
+      min-height: 220px;
+    }
+
+    .doc-card-icon {
+      padding: 20px 16px;
+    }
+
+    .doc-card-content {
+      padding: 16px;
+    }
+  }
+</style>

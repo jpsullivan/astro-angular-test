@@ -1,35 +1,85 @@
 ---
-title: Welcome to Angular Components Documentation
-description: A documentation site for standalone Angular components built with Spartan Brain.
-template: splash
-hero:
-  tagline: Beautiful, accessible Angular components powered by @spartan-ng/brain
-  actions:
-    - text: Get Started
-      link: /guides/introduction/
-      icon: right-arrow
-      variant: primary
-    - text: View Components
-      link: /components/badge/
-      icon: open-book
-      variant: secondary
+title: ACDocs
+description: Professional Angular component documentation and SaaS API reference for modern web applications.
+template: doc
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import LandingHero from '../../components/LandingHero.astro';
+import DocSection from '../../components/DocSection.astro';
+import DocCard from '../../components/DocCard.astro';
 
-## Features
+<LandingHero
+  title="ACDocs"
+  tagline="Comprehensive documentation for our Angular component library and SaaS platform API. Build modern, accessible web applications with production-ready components."
+>
 
-<CardGrid>
-  <Card title="Standalone Components" icon="puzzle">
-    Built using Angular's latest standalone components API.
-  </Card>
-  <Card title="Spartan Brain" icon="rocket">
-    Powered by the @spartan-ng/brain package for robust component primitives.
-  </Card>
-  <Card title="Live Examples" icon="star">
-    Interactive component demos directly in the documentation.
-  </Card>
-  <Card title="TypeScript First" icon="seti:typescript">
-    Fully typed for the best developer experience.
-  </Card>
-</CardGrid>
+<DocSection title="Get Started" columns={3}>
+  <DocCard
+    title="Quick Start Guide"
+    description="Learn how to set up your project and start building with our Angular components in minutes"
+    href="/start/overview/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>'
+  />
+  <DocCard
+    title="UI Component Demos"
+    description="Explore our collection of interactive, accessible Angular components with live code examples"
+    href="/components/badge/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/></svg>'
+  />
+  <DocCard
+    title="API Documentation"
+    description="Complete reference for our SaaS platform API endpoints, authentication, and integration patterns"
+    href="/api/overview/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 18L22 12 16 6"/><path d="M8 6L2 12 8 18"/></svg>'
+  />
+</DocSection>
+
+<DocSection title="Core Features" columns={4}>
+  <DocCard
+    title="Standalone Components"
+    description="Built with Angular's modern standalone API for better tree-shaking and performance"
+    href="/components/badge/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>'
+  />
+  <DocCard
+    title="Type-Safe APIs"
+    description="Full TypeScript support with strict typing for the best developer experience"
+    href="/start/overview/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>'
+  />
+  <DocCard
+    title="Accessibility First"
+    description="WCAG 2.1 compliant components with full keyboard navigation and screen reader support"
+    href="/guides/introduction/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>'
+  />
+  <DocCard
+    title="Live Code Examples"
+    description="Interactive demos with editable code snippets to learn and experiment quickly"
+    href="/components/input/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>'
+  />
+</DocSection>
+
+<DocSection title="Developer Resources" columns={3}>
+  <DocCard
+    title="Deployment Guide"
+    description="Learn how to deploy your application with our platform integration and CI/CD workflows"
+    href="/deploy/overview/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>'
+  />
+  <DocCard
+    title="Integration Patterns"
+    description="Best practices for integrating components into your existing Angular applications"
+    href="/start/primitives/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>'
+  />
+  <DocCard
+    title="Pro Tips"
+    description="Advanced techniques and performance optimization strategies from our engineering team"
+    href="/start/pro-tips/"
+    icon='<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>'
+  />
+</DocSection>
+
+</LandingHero>
