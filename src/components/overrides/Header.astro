@@ -1,8 +1,8 @@
 ---
 import Search from "@astrojs/starlight/components/Search.astro";
 import SiteTitle from "@astrojs/starlight/components/SiteTitle.astro";
-import ThemeSelect from "@astrojs/starlight/components/ThemeSelect.astro";
 import Button from "@components/Button.astro";
+import ThemeSelect from "@components/ThemeSelect.astro";
 
 // Get the current path to highlight active nav item
 const currentPath = Astro.url.pathname;
@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
   </div>
 
   <div class="hidden md:flex print:hidden right-group">
-    <!-- <ThemeSelect {...Astro.props} /> -->
+    <ThemeSelect />
     <Button href="mailto:feedback@yourdomain.com" variant="outline">
       Feedback
     </Button>

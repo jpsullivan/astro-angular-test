@@ -539,3 +539,139 @@ site-search {
 		background-color: var(--color-gray-100);
 	}
 }
+
+/* Dropdown Component Styles */
+.stl-ui-dropdown {
+	--stl-ui-dropdown-button-color: var(--stl-ui-foreground);
+	--stl-ui-dropdown-button-background-color: var(--stl-ui-card-background);
+	--stl-ui-dropdown-button-border-color: var(--stl-ui-border);
+	--stl-ui-dropdown-button-border-radius: var(--stl-ui-layout-border-radius-sml);
+	--stl-ui-dropdown-button-font-size: var(--stl-ui-type-scale-text-sm);
+	--stl-ui-dropdown-button-height: 32px;
+	--stl-ui-dropdown-button-padding: 0 10px;
+	--stl-ui-dropdown-button-line-height: 100%;
+	--stl-ui-dropdown-button-font-weight: 500;
+	position: relative;
+	display: inline-flex;
+	align-items: center;
+	color: var(--stl-ui-dropdown-button-color);
+	gap: 0;
+	font-size: var(--stl-ui-dropdown-button-font-size);
+}
+
+.stl-ui-dropdown .stl-ui-dropdown__button {
+	background-color: var(--stl-ui-dropdown-button-background-color);
+	border: 1px solid var(--stl-ui-dropdown-button-border-color);
+	border-radius: var(--stl-ui-dropdown-button-border-radius);
+	height: var(--stl-ui-dropdown-button-height);
+	padding: var(--stl-ui-dropdown-button-padding);
+	line-height: var(--stl-ui-dropdown-button-line-height);
+	font-weight: var(--stl-ui-dropdown-button-font-weight);
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: inherit;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown__trigger-selected {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+span.stl-dropdown-icon {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.stl-dropdown-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+}
+
+.stl-dropdown-icon svg {
+	width: 16px;
+	height: 16px;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown__button .stl-ui-dropdown__trigger-icon {
+	margin-right: -4px;
+	margin-left: 4px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown-menu {
+	--stl-ui-dropdown-menu-background-color: var(--stl-ui-card-background);
+	--stl-ui-dropdown-menu-border-color: var(--stl-ui-border);
+	--stl-ui-dropdown-menu-box-shadow: var(--stl-ui-shadow-md);
+	--stl-ui-dropdown-menu-border-radius: var(--stl-ui-layout-border-radius-sml);
+	background-color: var(--stl-ui-dropdown-menu-background-color);
+	border: 1px solid var(--stl-ui-dropdown-menu-border-color);
+	box-shadow: var(--stl-ui-dropdown-menu-box-shadow);
+	border-radius: var(--stl-ui-dropdown-menu-border-radius);
+	position: absolute;
+	right: 0;
+	z-index: 1000;
+	min-width: 100%;
+	padding: 4px;
+	display: none;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown-menu .stl-ui-dropdown-menu__item {
+	--stl-ui-dropdown-menu__item-border-radius: var(--stl-ui-dropdown-button-border-radius);
+	--stl-ui-dropdown-menu__item-height: var(--stl-ui-dropdown-button-height);
+	--stl-ui-dropdown-menu__item-line-height: var(--stl-ui-dropdown-button-line-height);
+	--stl-ui-dropdown-menu__item-hover-background-color: oklch(from var(--stl-ui-foreground) l c h / 0.05);
+	border-radius: var(--stl-ui-dropdown-menu__item-border-radius);
+	height: var(--stl-ui-dropdown-menu__item-height);
+	line-height: var(--stl-ui-dropdown-menu__item-line-height);
+	background: transparent;
+	border: none;
+	padding: 8px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	width: 100%;
+	color: var(--stl-ui-foreground);
+}
+
+.stl-ui-dropdown .stl-ui-dropdown-menu .stl-ui-dropdown-menu__item:hover {
+	background-color: var(--stl-ui-dropdown-menu__item-hover-background-color);
+}
+
+.stl-ui-dropdown .stl-ui-dropdown-menu .stl-ui-dropdown-menu__item .stl-ui-dropdown-menu__item-content {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown__icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.stl-ui-dropdown .stl-ui-dropdown-menu .stl-ui-dropdown-menu__item .stl-ui-dropdown-menu__item-text {
+	white-space: nowrap;
+}
+
+/* Shadow utilities */
+:root {
+	--stl-ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+	--stl-ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	--stl-ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.dark {
+	--stl-ui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.5);
+	--stl-ui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.4);
+	--stl-ui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.4);
+}
