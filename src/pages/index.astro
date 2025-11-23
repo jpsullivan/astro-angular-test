@@ -1,0 +1,204 @@
+---
+import '../styles/globals.css';
+import LandingPage from '../components/LandingPage.astro';
+import ThemeSelect from '../components/ThemeSelect.astro';
+import Button from '../components/Button.astro';
+---
+
+<!doctype html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Angular Components Documentation - ACDocs</title>
+    <meta
+      name="description"
+      content="Production-ready UI components and comprehensive API documentation for modern web applications."
+    />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="landing-header">
+        <div class="header">
+          <div class="left-group">
+            <a href="/" class="site-title">
+              <img src="/logo-light.svg" alt="ACDocs" class="logo logo-light" />
+              <img src="/logo-dark.svg" alt="ACDocs" class="logo logo-dark" />
+            </a>
+          </div>
+
+          <div class="right-group">
+            <ThemeSelect />
+            <Button href="mailto:feedback@yourdomain.com" variant="outline">
+              Feedback
+            </Button>
+            <Button href="https://app.yourdomain.com" target="_blank" variant="accent">
+              Dashboard
+            </Button>
+          </div>
+        </div>
+
+        <div class="secondary-nav-tabs">
+          <ul>
+            <li>
+              <a href="/start/" class="stl-ui-button stl-ui-button--ghost">Start</a>
+            </li>
+            <li>
+              <a href="/deploy/" class="stl-ui-button stl-ui-button--ghost">Deploy</a>
+            </li>
+            <li>
+              <a href="/components/" class="stl-ui-button stl-ui-button--ghost">Components</a>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <main class="landing-main">
+        <LandingPage />
+      </main>
+    </div>
+
+    <style>
+      .landing-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        background-color: var(--color-background);
+        border-bottom: 1px solid var(--color-border);
+        padding: var(--sl-nav-pad-y, 0.5rem) var(--sl-nav-pad-x, 1rem);
+      }
+
+      .header {
+        background-color: var(--color-background);
+        display: flex;
+        gap: var(--sl-nav-gap, 0.5rem);
+        justify-content: space-between;
+        align-items: center;
+        height: 100%;
+        width: 100%;
+        max-width: var(--sl-page-max-width);
+        margin: 0 auto;
+      }
+
+      .left-group {
+        display: flex;
+        align-items: center;
+      }
+
+      .site-title {
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        height: 32px;
+        width: auto;
+      }
+
+      .logo-light {
+        display: block;
+      }
+
+      .logo-dark {
+        display: none;
+      }
+
+      .dark .logo-light {
+        display: none;
+      }
+
+      .dark .logo-dark {
+        display: block;
+      }
+
+      .right-group {
+        gap: 0.75rem;
+        align-items: center;
+        display: none;
+      }
+
+      @media (min-width: 50rem) {
+        .right-group {
+          display: flex;
+        }
+      }
+
+      .secondary-nav-tabs {
+        display: none;
+        width: 100%;
+        max-width: var(--sl-page-max-width);
+        margin: 0 auto;
+      }
+
+      .secondary-nav-tabs ul {
+        display: flex;
+        align-items: center;
+        padding: 0;
+        list-style: none;
+        margin-bottom: -1px;
+        gap: 4px;
+      }
+
+      .secondary-nav-tabs li {
+        padding-bottom: 1px;
+        border-bottom: 2px solid transparent;
+        margin-bottom: -1px;
+      }
+
+      .secondary-nav-tabs li .stl-ui-button {
+        border-width: 0;
+        padding: 8px 12px;
+        margin-inline: -12px;
+      }
+
+      @media (min-width: 50rem) {
+        :root {
+          --sl-nav-height: 88px;
+        }
+
+        .landing-header {
+          display: flex;
+          flex-direction: column;
+          gap: 0.29rem;
+          padding-bottom: 0;
+        }
+
+        .header {
+          padding-inline-start: 0;
+          padding-inline-end: 0;
+        }
+
+        .secondary-nav-tabs {
+          display: block;
+        }
+
+        .header,
+        .secondary-nav-tabs {
+          padding-inline: 20px;
+        }
+      }
+
+      .landing-main {
+        width: 100%;
+        background: var(--color-background);
+        margin-top: 56px;
+      }
+
+      @media (min-width: 50rem) {
+        .landing-main {
+          margin-top: 88px;
+        }
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+    </style>
+  </body>
+</html>
